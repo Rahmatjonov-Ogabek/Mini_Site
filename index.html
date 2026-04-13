@@ -60,7 +60,9 @@
     .toolbar {
       display: flex;
       justify-content: flex-end;
+      gap: 12px;
       margin-bottom: 16px;
+      flex-wrap: wrap;
     }
 
     .toggle {
@@ -354,6 +356,7 @@
   <div class="wrap">
     <div class="toolbar">
       <button class="toggle" onclick="temaAlmashtir()">🌙 / ☀️ Tema</button>
+      <button class="toggle" onclick="tilAlmashtir()">UZ / EN</button>
     </div>
 
     <div class="card">
@@ -363,102 +366,102 @@
         </div>
 
         <div>
-          <h1>Og‘abek Rahmatjonov</h1>
-          <div class="kasb">Junior Developer • Fullstack o‘rganuvchi • Ambitsiyali yosh mutaxassis</div>
-          <div class="text">
+          <h1 id="ism">Og‘abek Rahmatjonov</h1>
+          <div class="kasb" id="kasb">Junior Developer • Fullstack o‘rganuvchi • Ambitsiyali yosh mutaxassis</div>
+          <div class="text" id="aboutText">
             Men startup g‘oyalari, texnologiya va rivojlanishga qiziqaman. Word, PDF, HTML va kompyuter bilan ishlashni bilaman. Tez o‘rganaman, mas’uliyat bilan ishlayman va yangi imkoniyatlarga doim ochiqman.
           </div>
 
           <div class="btns">
-            <a class="btn btn1" href="cv.pdf" download>📄 CV yuklab olish</a>
-            <a class="btn btn1" href="tel:+998505529515">📞 Qo‘ng‘iroq</a>
-            <a class="btn btn2" href="mailto:ogabekrahmatjonov112@gmail.com">📧 Email</a>
-            <a class="btn btn3" href="https://t.me/Ogabek_Rahmatjonov" target="_blank">💬 Telegram</a>
-            <a class="btn btn4" href="https://www.instagram.com/uzdof/" target="_blank">📸 Instagram</a>
+            <a class="btn btn1" href="cv.pdf" download id="cvBtn">📄 CV yuklab olish</a>
+            <a class="btn btn1" href="tel:+998505529515" id="callBtn">📞 Qo‘ng‘iroq</a>
+            <a class="btn btn2" href="mailto:ogabekrahmatjonov112@gmail.com" id="emailBtn">📧 Email</a>
+            <a class="btn btn3" href="https://t.me/Ogabek_Rahmatjonov" target="_blank" id="tgBtn">💬 Telegram</a>
+            <a class="btn btn4" href="https://www.instagram.com/uzdof/" target="_blank" id="igBtn">📸 Instagram</a>
           </div>
         </div>
       </div>
 
       <div class="grid">
         <div class="box">
-          <h2>Ko‘nikmalar</h2>
+          <h2 id="skillsTitle">Ko‘nikmalar</h2>
 
           <div class="skill">
-            <span><b>Microsoft Word / PDF</b> <b>90%</b></span>
+            <span><b id="skill1">Microsoft Word / PDF</b> <b>90%</b></span>
             <div class="bar"><div class="fill f1"></div></div>
           </div>
 
           <div class="skill">
-            <span><b>HTML / CSS</b> <b>82%</b></span>
+            <span><b id="skill2">HTML / CSS</b> <b>82%</b></span>
             <div class="bar"><div class="fill f2"></div></div>
           </div>
 
           <div class="skill">
-            <span><b>JavaScript</b> <b>68%</b></span>
+            <span><b id="skill3">JavaScript</b> <b>68%</b></span>
             <div class="bar"><div class="fill f3"></div></div>
           </div>
 
           <div class="skill">
-            <span><b>Kompyuter savodxonligi</b> <b>75%</b></span>
+            <span><b id="skill4">Kompyuter savodxonligi</b> <b>75%</b></span>
             <div class="bar"><div class="fill f4"></div></div>
           </div>
         </div>
 
         <div class="box">
-          <h2>Tajriba</h2>
+          <h2 id="expTitle">Tajriba</h2>
           <ul>
-            <li>Regicton LC — Savdo menejeri</li>
-            <li>Mijozlar bilan ishlash va sotuv</li>
-            <li>Startup ustida ishlash</li>
-            <li>Yangi narsalarni tez o‘rganish</li>
+            <li id="exp1">Regicton LC — Savdo menejeri</li>
+            <li id="exp2">Mijozlar bilan ishlash va sotuv</li>
+            <li id="exp3">Startup ustida ishlash</li>
+            <li id="exp4">Yangi narsalarni tez o‘rganish</li>
           </ul>
         </div>
 
         <div class="box">
-          <h2>Ta’lim</h2>
+          <h2 id="eduTitle">Ta’lim</h2>
           <ul>
-            <li>Najot Ta’lim — Fullstack</li>
-            <li>Cambridge — Ingliz tili</li>
-            <li>AIFU Universiteti</li>
+            <li id="edu1">Najot Ta’lim — Fullstack</li>
+            <li id="edu2">Cambridge — Ingliz tili</li>
+            <li id="edu3">AIFU Universiteti</li>
           </ul>
         </div>
 
         <div class="box">
-          <h2>Tillar</h2>
+          <h2 id="langTitle">Tillar</h2>
           <ul>
-            <li>O‘zbek — mukammal</li>
-            <li>Ingliz — o‘rganmoqda</li>
-            <li>Rus — boshlang‘ich</li>
+            <li id="lang1">O‘zbek — mukammal</li>
+            <li id="lang2">Ingliz — o‘rganmoqda</li>
+            <li id="lang3">Rus — boshlang‘ich</li>
           </ul>
         </div>
       </div>
 
       <div class="portfolioWrap">
         <div class="box">
-          <h2>Portfolio</h2>
+          <h2 id="portfolioTitle">Portfolio</h2>
           <div class="portfolio">
             <div class="project">
-              <h3>Mini CV Website</h3>
-              <p>O‘zim haqimda qisqa ma’lumot, bog‘lanish tugmalari va zamonaviy dizayndagi shaxsiy sayt.</p>
-              <a class="plink" href="https://rahmatjonov-ogabek.github.io/Mini_Site/" target="_blank">Ko‘rish</a>
+              <h3 id="p1t">Mini CV Website</h3>
+              <p id="p1d">O‘zim haqimda qisqa ma’lumot, bog‘lanish tugmalari va zamonaviy dizayndagi shaxsiy sayt.</p>
+              <a class="plink" href="https://rahmatjonov-ogabek.github.io/Mini_Site/" target="_blank" id="p1b">Ko‘rish</a>
             </div>
 
             <div class="project">
-              <h3>Startup G‘oya</h3>
-              <p>Texnologiya va foydalanuvchi tajribasiga yo‘naltirilgan yangi loyiha konsepsiyasi ustida ishlash.</p>
-              <a class="plink" href="https://t.me/Ogabek_Rahmatjonov" target="_blank">Bog‘lanish</a>
+              <h3 id="p2t">Startup G‘oya</h3>
+              <p id="p2d">Texnologiya va foydalanuvchi tajribasiga yo‘naltirilgan yangi loyiha konsepsiyasi ustida ishlash.</p>
+              <a class="plink" href="https://t.me/Ogabek_Rahmatjonov" target="_blank" id="p2b">Bog‘lanish</a>
             </div>
 
             <div class="project">
-              <h3>Kontent va Outreach</h3>
-              <p>Kontent, mualliflar, ijtimoiy tarmoqlar va onlayn aloqa jarayonlariga qiziqish va tajriba.</p>
-              <a class="plink" href="https://www.instagram.com/uzdof/" target="_blank">Instagram</a>
+              <h3 id="p3t">Kontent va Outreach</h3>
+              <p id="p3d">Kontent, mualliflar, ijtimoiy tarmoqlar va onlayn aloqa jarayonlariga qiziqish va tajriba.</p>
+              <a class="plink" href="https://www.instagram.com/uzdof/" target="_blank" id="p3b">Instagram</a>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="past">
+      <div class="past" id="footerText">
         © 2026 Og‘abek Rahmatjonov — Personal CV Website
       </div>
     </div>
@@ -467,6 +470,80 @@
   <script>
     function temaAlmashtir() {
       document.body.classList.toggle('light');
+    }
+
+    let hozirgiTil = 'uz';
+
+    function tilAlmashtir() {
+      if (hozirgiTil === 'uz') {
+        document.documentElement.lang = 'en';
+        document.getElementById('kasb').textContent = 'Junior Developer • Fullstack Learner • Ambitious Young Specialist';
+        document.getElementById('aboutText').textContent = 'I am a young specialist interested in startup ideas, technology and growth. I can work with Word, PDF, HTML and computers. I learn fast, work responsibly and stay open to new opportunities.';
+        document.getElementById('cvBtn').textContent = '📄 Download CV';
+        document.getElementById('callBtn').textContent = '📞 Call';
+        document.getElementById('emailBtn').textContent = '📧 Email';
+        document.getElementById('tgBtn').textContent = '💬 Telegram';
+        document.getElementById('igBtn').textContent = '📸 Instagram';
+        document.getElementById('skillsTitle').textContent = 'Skills';
+        document.getElementById('skill4').textContent = 'Computer Literacy';
+        document.getElementById('expTitle').textContent = 'Experience';
+        document.getElementById('exp1').textContent = 'Regicton LC — Sales Manager';
+        document.getElementById('exp2').textContent = 'Client communication and sales';
+        document.getElementById('exp3').textContent = 'Working on a startup';
+        document.getElementById('exp4').textContent = 'Fast learner';
+        document.getElementById('eduTitle').textContent = 'Education';
+        document.getElementById('edu1').textContent = 'Najot Ta’lim — Fullstack';
+        document.getElementById('edu2').textContent = 'Cambridge — English';
+        document.getElementById('edu3').textContent = 'AIFU University';
+        document.getElementById('langTitle').textContent = 'Languages';
+        document.getElementById('lang1').textContent = 'Uzbek — fluent';
+        document.getElementById('lang2').textContent = 'English — learning';
+        document.getElementById('lang3').textContent = 'Russian — beginner';
+        document.getElementById('portfolioTitle').textContent = 'Portfolio';
+        document.getElementById('p1d').textContent = 'A personal website with short information about me, contact buttons and a modern design.';
+        document.getElementById('p1b').textContent = 'View';
+        document.getElementById('p2t').textContent = 'Startup Idea';
+        document.getElementById('p2d').textContent = 'Working on a new project concept focused on technology and user experience.';
+        document.getElementById('p2b').textContent = 'Contact';
+        document.getElementById('p3t').textContent = 'Content and Outreach';
+        document.getElementById('p3d').textContent = 'Interest and experience in content, authors, social media and online communication.';
+        document.getElementById('footerText').textContent = '© 2026 Og‘abek Rahmatjonov — Personal CV Website';
+        hozirgiTil = 'en';
+      } else {
+        document.documentElement.lang = 'uz';
+        document.getElementById('kasb').textContent = 'Junior Developer • Fullstack o‘rganuvchi • Ambitsiyali yosh mutaxassis';
+        document.getElementById('aboutText').textContent = 'Men startup g‘oyalari, texnologiya va rivojlanishga qiziqaman. Word, PDF, HTML va kompyuter bilan ishlashni bilaman. Tez o‘rganaman, mas’uliyat bilan ishlayman va yangi imkoniyatlarga doim ochiqman.';
+        document.getElementById('cvBtn').textContent = '📄 CV yuklab olish';
+        document.getElementById('callBtn').textContent = '📞 Qo‘ng‘iroq';
+        document.getElementById('emailBtn').textContent = '📧 Email';
+        document.getElementById('tgBtn').textContent = '💬 Telegram';
+        document.getElementById('igBtn').textContent = '📸 Instagram';
+        document.getElementById('skillsTitle').textContent = 'Ko‘nikmalar';
+        document.getElementById('skill4').textContent = 'Kompyuter savodxonligi';
+        document.getElementById('expTitle').textContent = 'Tajriba';
+        document.getElementById('exp1').textContent = 'Regicton LC — Savdo menejeri';
+        document.getElementById('exp2').textContent = 'Mijozlar bilan ishlash va sotuv';
+        document.getElementById('exp3').textContent = 'Startup ustida ishlash';
+        document.getElementById('exp4').textContent = 'Yangi narsalarni tez o‘rganish';
+        document.getElementById('eduTitle').textContent = 'Ta’lim';
+        document.getElementById('edu1').textContent = 'Najot Ta’lim — Fullstack';
+        document.getElementById('edu2').textContent = 'Cambridge — Ingliz tili';
+        document.getElementById('edu3').textContent = 'AIFU Universiteti';
+        document.getElementById('langTitle').textContent = 'Tillar';
+        document.getElementById('lang1').textContent = 'O‘zbek — mukammal';
+        document.getElementById('lang2').textContent = 'Ingliz — o‘rganmoqda';
+        document.getElementById('lang3').textContent = 'Rus — boshlang‘ich';
+        document.getElementById('portfolioTitle').textContent = 'Portfolio';
+        document.getElementById('p1d').textContent = 'O‘zim haqimda qisqa ma’lumot, bog‘lanish tugmalari va zamonaviy dizayndagi shaxsiy sayt.';
+        document.getElementById('p1b').textContent = 'Ko‘rish';
+        document.getElementById('p2t').textContent = 'Startup G‘oya';
+        document.getElementById('p2d').textContent = 'Texnologiya va foydalanuvchi tajribasiga yo‘naltirilgan yangi loyiha konsepsiyasi ustida ishlash.';
+        document.getElementById('p2b').textContent = 'Bog‘lanish';
+        document.getElementById('p3t').textContent = 'Kontent va Outreach';
+        document.getElementById('p3d').textContent = 'Kontent, mualliflar, ijtimoiy tarmoqlar va onlayn aloqa jarayonlariga qiziqish va tajriba.';
+        document.getElementById('footerText').textContent = '© 2026 Og‘abek Rahmatjonov — Personal CV Website';
+        hozirgiTil = 'uz';
+      }
     }
   </script>
 </body>
