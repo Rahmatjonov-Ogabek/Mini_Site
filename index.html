@@ -3,104 +3,131 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Og'abek Rahmatjonov | CV</title>
+  <title>Og'abek Rahmatjonov | Portfolio</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg1: #020617;
-      --bg2: #0f172a;
-      --bg3: #1e1b4b;
-      --text: #ffffff;
-      --muted: #dbeafe;
-      --card: rgba(255,255,255,0.08);
-      --border: rgba(255,255,255,0.12);
-      --box: rgba(255,255,255,0.06);
-      --accent1: #22c55e;
-      --accent2: #3b82f6;
-      --accent3: #a855f7;
-      --accent4: #ec4899;
-      --shadow: 0 20px 60px rgba(0,0,0,0.28);
+      --bg: #ece8e1;
+      --bg2: #ddd7ce;
+      --paper: rgba(255,255,255,0.42);
+      --paper-2: rgba(255,255,255,0.66);
+      --ink: #222222;
+      --muted: #5f5b56;
+      --line: rgba(34,34,34,0.12);
+      --accent: #b56a16;
+      --accent-2: #8f5615;
+      --card: #d7d1c9;
+      --shadow: 0 20px 60px rgba(44, 37, 27, 0.12);
     }
 
-    body.light {
-      --bg1: #eff6ff;
-      --bg2: #dbeafe;
-      --bg3: #f8fafc;
-      --text: #0f172a;
-      --muted: #334155;
-      --card: rgba(255,255,255,0.76);
-      --border: rgba(15,23,42,0.08);
-      --box: rgba(255,255,255,0.7);
-      --shadow: 0 20px 60px rgba(15,23,42,0.12);
+    body.dark {
+      --bg: #1f1d1a;
+      --bg2: #2d2924;
+      --paper: rgba(36,34,31,0.64);
+      --paper-2: rgba(44,41,37,0.82);
+      --ink: #f1ece5;
+      --muted: #c8beb2;
+      --line: rgba(255,255,255,0.1);
+      --accent: #e79a42;
+      --accent-2: #c97c1f;
+      --card: #3a352f;
+      --shadow: 0 20px 70px rgba(0,0,0,0.22);
     }
 
-    html {
+    html, body {
       min-height: 100%;
       background:
-        radial-gradient(circle at top left, rgba(59,130,246,0.18), transparent 28%),
-        radial-gradient(circle at bottom right, rgba(168,85,247,0.18), transparent 24%),
-        linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
-      background-attachment: fixed;
-      background-repeat: no-repeat;
+        radial-gradient(circle at top left, rgba(255,255,255,0.55), transparent 22%),
+        radial-gradient(circle at bottom right, rgba(0,0,0,0.04), transparent 24%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color: var(--ink);
+      font-family: Arial, sans-serif;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(59,130,246,0.18), transparent 28%),
-        radial-gradient(circle at bottom right, rgba(168,85,247,0.18), transparent 24%),
-        linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
-      background-attachment: fixed;
-      background-repeat: no-repeat;
-      color: var(--text);
-      min-height: 100vh;
-      padding: 18px;
-      transition: 0.35s ease;
+      padding: 20px;
       overflow-x: hidden;
+      transition: .28s ease;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .22;
+      background-image:
+        radial-gradient(rgba(0,0,0,.08) 0.6px, transparent 0.6px),
+        radial-gradient(rgba(255,255,255,.25) 0.7px, transparent 0.7px);
+      background-size: 8px 8px, 13px 13px;
+      background-position: 0 0, 2px 2px;
+      mix-blend-mode: multiply;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      position: relative;
     }
 
     .menu-avatar {
       position: absolute;
-      top: 18px;
-      left: 18px;
-      width: 52px;
-      height: 52px;
+      top: 8px;
+      left: 8px;
+      width: 54px;
+      height: 54px;
       border-radius: 50%;
       overflow: hidden;
-      border: 2px solid rgba(255,255,255,0.25);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      border: 2px solid rgba(255,255,255,0.7);
+      background: #bbb4ab;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
       cursor: pointer;
       z-index: 1200;
-      background: #111827;
-      transition: transform 0.45s ease, opacity 0.3s ease, top 0.45s ease, left 0.45s ease, width 0.45s ease, height 0.45s ease;
-      transform-origin: top left;
+      transition: opacity .18s ease;
     }
 
-    .menu-avatar.to-sidebar {
-      top: 36px;
-      left: 36px;
-      width: 58px;
-      height: 58px;
-      opacity: 0.08;
-      transform: scale(1.05);
+    .menu-avatar.hidden-avatar {
+      opacity: 0;
       pointer-events: none;
     }
 
-    .menu-avatar img {
+    .menu-avatar img,
+    .avatar-clone img,
+    .side-top img,
+    .hero-photo img,
+    .gallery-slide img,
+    .viewer-slide img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
+    }
+
+    .avatar-clone {
+      position: fixed;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.75);
+      z-index: 1300;
+      pointer-events: none;
+      opacity: 0;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.14);
     }
 
     .overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.45);
+      background: rgba(20, 17, 12, 0.28);
       opacity: 0;
       pointer-events: none;
-      transition: 0.3s ease;
+      transition: .18s ease;
       z-index: 1090;
+      backdrop-filter: blur(2px);
     }
 
     .overlay.open {
@@ -114,21 +141,31 @@
       left: -320px;
       width: 300px;
       height: 100vh;
-      background: rgba(15,23,42,0.96);
-      border-right: 1px solid rgba(255,255,255,0.1);
-      backdrop-filter: blur(12px);
+      background: rgba(246, 241, 233, 0.92);
+      border-right: 1px solid var(--line);
+      backdrop-filter: blur(14px);
       z-index: 1100;
-      transition: 0.35s ease;
+      transition: .22s ease;
       padding: 18px;
       overflow-y: auto;
+      box-shadow: 10px 0 30px rgba(0,0,0,0.08);
     }
 
-    body.light .sidebar {
-      background: rgba(255,255,255,0.95);
+    body.dark .sidebar {
+      background: rgba(36,34,31,0.95);
     }
 
-    .sidebar.open {
-      left: 0;
+    .sidebar.open { left: 0; }
+
+    .close-btn {
+      position: absolute;
+      top: 16px;
+      right: 14px;
+      border: none;
+      background: transparent;
+      color: var(--ink);
+      font-size: 28px;
+      cursor: pointer;
     }
 
     .side-top {
@@ -140,40 +177,25 @@
     }
 
     .side-top img {
-      width: 58px;
-      height: 58px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid rgba(255,255,255,0.18);
+      border: 2px solid rgba(255,255,255,0.8);
       cursor: pointer;
-      transition: transform 0.25s ease;
-    }
-
-    .side-top img:hover {
-      transform: scale(1.06);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.1);
     }
 
     .side-name {
-      font-weight: 700;
       font-size: 18px;
+      font-weight: 700;
+      letter-spacing: .2px;
     }
 
     .side-role {
-      font-size: 13px;
-      color: var(--muted);
       margin-top: 4px;
-      line-height: 1.4;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 16px;
-      right: 14px;
-      border: none;
-      background: transparent;
-      color: var(--text);
-      font-size: 26px;
-      cursor: pointer;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
     }
 
     .side-links {
@@ -183,16 +205,35 @@
       margin-top: 18px;
     }
 
+    .side-link,
+    .side-actions button,
+    .toolbar button,
+    .gallery-btn,
+    .viewer-btn {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
     .side-link {
-      border: 1px solid var(--border);
-      background: var(--box);
-      color: var(--text);
       text-decoration: none;
       padding: 14px 16px;
-      border-radius: 14px;
-      cursor: pointer;
-      text-align: left;
+      border-radius: 16px;
       font-size: 15px;
+      text-align: left;
+    }
+
+    .side-link:hover,
+    .side-actions button:hover,
+    .toolbar button:hover,
+    .gallery-btn:hover,
+    .viewer-btn:hover,
+    .project:hover,
+    .info-item:hover {
+      transform: translateY(-2px);
+      background: var(--paper-2);
     }
 
     .side-actions {
@@ -202,437 +243,472 @@
       margin-top: 16px;
     }
 
-    .side-actions button {
-      border: 1px solid var(--border);
-      background: var(--box);
-      color: var(--text);
-      padding: 12px 10px;
-      border-radius: 12px;
-      cursor: pointer;
-    }
-
-    .wrap {
-      position: relative;
-      width: 100%;
-      max-width: 1080px;
-      margin: 60px auto 0;
+    .side-actions button,
+    .toolbar button {
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-size: 14px;
+      backdrop-filter: blur(10px);
     }
 
     .toolbar {
       display: flex;
       justify-content: flex-end;
-      gap: 12px;
-      margin-bottom: 16px;
+      gap: 10px;
+      margin-bottom: 18px;
       flex-wrap: wrap;
     }
 
-    .toggle {
-      border: none;
-      background: var(--card);
-      color: var(--text);
-      padding: 12px 16px;
-      border-radius: 12px;
-      cursor: pointer;
-      border: 1px solid var(--border);
-      backdrop-filter: blur(10px);
-      transition: 0.25s ease;
-    }
-
-    .card, .section-card {
-      width: 100%;
-      background: var(--card);
-      backdrop-filter: blur(14px);
-      border: 1px solid var(--border);
-      border-radius: 28px;
-      padding: 34px;
-      box-shadow: var(--shadow);
-      animation: chiqish 0.8s ease;
+    .hero {
       position: relative;
+      min-height: 82vh;
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      padding: 36px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+      box-shadow: var(--shadow);
       overflow: hidden;
     }
 
-    .section-card { margin-top: 22px; }
+    .hero::before {
+      content: "Built to Inspire";
+      position: absolute;
+      top: 20px;
+      left: 34px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      opacity: .82;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 10px;
+      width: calc(100% - 68px);
+    }
 
-    .card::before, .section-card::before {
+    .hero::after {
+      content: "Updated 2026";
+      position: absolute;
+      top: 20px;
+      right: 34px;
+      font-size: 14px;
+      color: var(--muted);
+      letter-spacing: .5px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 28px;
+      align-items: center;
+      margin-top: 58px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: clamp(26px, 5vw, 74px);
+      font-style: italic;
+      line-height: .95;
+      margin-bottom: -10px;
+      font-family: Georgia, serif;
+      opacity: .95;
+    }
+
+    .hero-title {
+      font-size: clamp(54px, 11vw, 136px);
+      line-height: .88;
+      letter-spacing: -2px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .hero-sub {
+      margin-top: 18px;
+      max-width: 640px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .hero-btn {
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 13px 18px;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      background: var(--paper);
+      font-weight: 700;
+      transition: .2s ease;
+    }
+
+    .hero-btn.primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .hero-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero-showcase {
+      background: rgba(190, 184, 176, 0.56);
+      border: 1px solid rgba(255,255,255,0.45);
+      border-radius: 34px;
+      padding: 18px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2);
+      position: relative;
+    }
+
+    .hero-showcase::before,
+    .portfolio-grid::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(120deg, rgba(255,255,255,0.05), transparent 30%, transparent 70%, rgba(255,255,255,0.05));
+      background-image: linear-gradient(rgba(255,255,255,0.16) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.16) 1px, transparent 1px);
+      background-size: 28px 28px;
+      border-radius: inherit;
       pointer-events: none;
+      opacity: .6;
     }
 
-    @keyframes chiqish {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .top {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 26px;
-      align-items: center;
-      margin-bottom: 30px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .rasm {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 4px solid rgba(255,255,255,0.18);
-      background: #1f2937;
-      margin: 0 auto;
-      box-shadow: 0 0 0 8px rgba(255,255,255,0.04), 0 0 35px rgba(59,130,246,0.22), 0 0 55px rgba(168,85,247,0.16);
-      animation: glow 3s infinite alternate ease-in-out;
-    }
-
-    @keyframes glow {
-      from { box-shadow: 0 0 0 8px rgba(255,255,255,0.04), 0 0 30px rgba(59,130,246,0.18), 0 0 45px rgba(168,85,247,0.12); }
-      to { box-shadow: 0 0 0 10px rgba(255,255,255,0.05), 0 0 42px rgba(59,130,246,0.26), 0 0 68px rgba(168,85,247,0.2); }
-    }
-
-    .rasm img { width: 100%; height: 100%; object-fit: cover; }
-
-    h1 { font-size: 42px; margin-bottom: 8px; }
-    h2 { font-size: 24px; margin-bottom: 16px; }
-    h3 { font-size: 18px; margin-bottom: 10px; }
-
-    .kasb {
-      font-size: 18px;
-      color: #93c5fd;
-      margin-bottom: 12px;
-    }
-
-    body.light .kasb { color: #2563eb; }
-
-    .text, .about-text, .gallery-note {
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    .btns {
-      margin-top: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: stretch;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 18px;
-      border-radius: 12px;
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-      transition: 0.25s ease;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.16);
-      min-height: 48px;
-      text-align: center;
-    }
-
-    .btn1 { background: var(--accent1); }
-    .btn2 { background: var(--accent2); }
-    .btn3 { background: var(--accent3); }
-    .btn4 { background: linear-gradient(135deg, #f97316, var(--accent4), #7c3aed); }
-    .btn-download {
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.18);
-      min-width: 130px;
-      padding: 10px 14px;
-      font-size: 14px;
-    }
-
-    .btn:hover, .toggle:hover, .side-link:hover, .side-actions button:hover, .gallery-btn:hover, .viewer-btn:hover {
-      transform: translateY(-3px) scale(1.02);
-      opacity: 0.96;
-    }
-
-    .grid {
+    .showcase-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-      margin-top: 28px;
+      gap: 14px;
       position: relative;
       z-index: 1;
     }
 
-    .box {
-      background: var(--box);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 20px;
-      animation: chiqish 0.9s ease;
-      transition: 0.25s ease;
+    .mini-card,
+    .project,
+    .info-item,
+    .section-box,
+    .gallery-wrap,
+    .viewer-box {
+      background: var(--paper-2);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
     }
 
-    .box:hover, .project:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.18); }
-
-    .box ul { padding-left: 18px; color: var(--muted); line-height: 1.9; }
-
-    .skill { margin-bottom: 14px; }
-    .skill span {
+    .mini-card {
+      border-radius: 26px;
+      padding: 14px;
+      min-height: 170px;
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
-      margin-bottom: 6px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .bar {
-      width: 100%;
-      height: 10px;
-      background: rgba(255,255,255,0.12);
-      border-radius: 999px;
       overflow: hidden;
+      position: relative;
     }
 
-    .fill {
-      height: 100%;
+    .mini-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .mini-title {
+      font-size: 28px;
+      line-height: .95;
+      font-weight: 800;
+      margin-top: 8px;
+      color: var(--ink);
+    }
+
+    .mini-title span { color: var(--accent); }
+
+    .mini-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 12px;
+    }
+
+    .pill {
+      display: inline-flex;
+      padding: 8px 12px;
       border-radius: 999px;
-      animation: tol 1.4s ease;
+      background: var(--accent);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
     }
 
-    .f1 { width: 90%; background: var(--accent1); }
-    .f2 { width: 82%; background: var(--accent2); }
-    .f3 { width: 68%; background: var(--accent3); }
-    .f4 { width: 75%; background: #f59e0b; }
+    .hero-photo {
+      width: 100%;
+      height: 210px;
+      border-radius: 26px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      background: #c7c0b5;
+    }
 
-    @keyframes tol { from { width: 0; } }
+    .section-title {
+      margin-top: 22px;
+      margin-bottom: 14px;
+      font-size: clamp(28px, 6vw, 70px);
+      letter-spacing: -1px;
+      line-height: .96;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
 
-    .portfolio {
+    .section-title span {
+      color: var(--accent);
+      font-style: italic;
+      font-family: Georgia, serif;
+      text-transform: none;
+      font-weight: 400;
+      margin-right: 10px;
+    }
+
+    .section-card {
+      margin-top: 22px;
+      border-radius: 34px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.05));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .portfolio-grid {
+      position: relative;
+      background: rgba(190, 184, 176, 0.42);
+      border-radius: 30px;
+      padding: 18px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
-      margin-top: 14px;
+      overflow: hidden;
     }
 
     .project {
-      background: var(--box);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 18px;
-      transition: 0.25s ease;
+      border-radius: 26px;
+      padding: 16px;
+      transition: .2s ease;
+      position: relative;
+      z-index: 1;
     }
 
-    .project p { color: var(--muted); line-height: 1.7; font-size: 14px; margin-bottom: 12px; }
+    .project-image {
+      width: 100%;
+      height: 170px;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      background: #cec7be;
+    }
+
+    .project h3 {
+      font-size: 24px;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .project p {
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
 
     .plink {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       text-decoration: none;
-      color: white;
-      background: rgba(59,130,246,0.85);
-      padding: 9px 12px;
-      border-radius: 10px;
-      font-size: 14px;
+      color: #fff;
+      background: var(--accent);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
     }
 
     .about-grid {
       display: grid;
-      grid-template-columns: 1.1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 22px;
-      margin-top: 16px;
+      align-items: start;
+    }
+
+    .about-text {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 15px;
     }
 
     .info-list {
       display: grid;
       gap: 10px;
-      margin-top: 14px;
+      margin-top: 16px;
     }
 
     .info-item {
-      background: var(--box);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 12px 14px;
+      border-radius: 18px;
+      padding: 14px 16px;
       color: var(--muted);
+      transition: .2s ease;
     }
 
-    .info-item b { color: var(--text); }
+    .info-item b { color: var(--ink); }
 
     .gallery-wrap {
       position: relative;
       overflow: hidden;
-      border-radius: 18px;
-      border: 1px solid var(--border);
-      background: var(--box);
+      border-radius: 24px;
       padding: 0;
     }
 
-    .gallery-track {
+    .gallery-track,
+    .viewer-track {
       display: flex;
-      gap: 0;
-      transition: transform 0.45s ease;
-      will-change: transform;
       width: 100%;
+      transition: transform .35s ease;
+    }
+
+    .gallery-slide,
+    .viewer-slide {
+      min-width: 100%;
+      width: 100%;
+      flex-shrink: 0;
+      overflow: hidden;
+      background: #d1cbc2;
     }
 
     .gallery-slide {
-      min-width: 100%;
-      width: 100%;
-      height: 320px;
-      border-radius: 0;
-      overflow: hidden;
-      flex-shrink: 0;
-      background: #0b1120;
+      height: 380px;
     }
 
-    .gallery-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .viewer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(18,16,12,0.72);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1400;
+      padding: 20px;
+      backdrop-filter: blur(6px);
+    }
+
+    .viewer-overlay.open { display: flex; }
+
+    .viewer-box {
+      width: min(92vw, 980px);
+      border-radius: 28px;
+      padding: 18px;
+      position: relative;
+    }
+
+    .viewer-stage {
+      overflow: hidden;
+      border-radius: 20px;
+    }
+
+    .viewer-slide {
+      height: min(72vh, 760px);
+    }
+
+    .viewer-slide img {
+      object-fit: contain;
+      background: #111;
+    }
+
+    .viewer-close {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      border: none;
+      background: transparent;
+      color: var(--ink);
+      font-size: 32px;
       cursor: pointer;
     }
 
-    .gallery-controls {
+    .gallery-controls,
+    .viewer-controls {
       display: flex;
       justify-content: center;
       gap: 10px;
       margin-top: 14px;
     }
 
-    .gallery-btn {
-      border: 1px solid var(--border);
-      background: var(--box);
-      color: var(--text);
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 18px;
-    }
-
-    .hidden-section { display: none; }
-    .show-section { display: block; }
-
-    .viewer-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.82);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1400;
-      padding: 20px;
-    }
-
-    .viewer-overlay.open {
-      display: flex;
-    }
-
-    .viewer-box {
-      width: min(92vw, 920px);
-      background: rgba(15,23,42,0.82);
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 22px;
-      padding: 18px;
-      position: relative;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-    }
-
-    .viewer-close {
-      position: absolute;
-      top: 10px;
-      right: 12px;
-      border: none;
-      background: transparent;
-      color: white;
-      font-size: 30px;
-      cursor: pointer;
-      z-index: 2;
-    }
-
-    .viewer-stage {
-      overflow: hidden;
-      border-radius: 18px;
-    }
-
-    .viewer-track {
-      display: flex;
-      transition: transform 0.42s ease;
-    }
-
-    .viewer-slide {
-      min-width: 100%;
-      height: min(72vh, 700px);
-      background: #020617;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .viewer-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    .viewer-controls {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 14px;
-    }
-
+    .gallery-btn,
     .viewer-btn {
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.08);
-      color: white;
       width: 46px;
       height: 46px;
       border-radius: 50%;
-      cursor: pointer;
-      font-size: 20px;
+      font-size: 18px;
+    }
+
+    .muted-note,
+    .past {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
     }
 
     .past {
       margin-top: 28px;
       text-align: center;
-      color: var(--muted);
-      font-size: 14px;
-      position: relative;
-      z-index: 1;
     }
 
-    @media (max-width: 900px) {
-      .portfolio, .about-grid { grid-template-columns: 1fr; }
+    .hidden-section { display: none; }
+    .show-section { display: block; }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .about-grid,
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .showcase-grid {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
     @media (max-width: 800px) {
-      .top { grid-template-columns: 1fr; text-align: center; }
-      .grid { grid-template-columns: 1fr; }
-      h1 { font-size: 32px; }
-      .btns {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        justify-content: center;
-      }
+      body { padding: 14px; }
+      .hero,
+      .section-card { padding: 22px; border-radius: 26px; }
+      .hero::before { left: 22px; width: calc(100% - 44px); font-size: 15px; }
+      .hero::after { right: 22px; font-size: 12px; }
+      .toolbar { justify-content: flex-end; }
+      .menu-avatar { width: 48px; height: 48px; }
+      .showcase-grid { grid-template-columns: 1fr; }
+      .btns,
+      .hero-actions { display: grid; grid-template-columns: 1fr 1fr; }
       .btn-order-tg { grid-column: 1 / 2; grid-row: 1; }
       .btn-order-ig { grid-column: 2 / 3; grid-row: 1; }
       .btn-order-call { grid-column: 1 / 2; grid-row: 2; }
       .btn-order-email { grid-column: 2 / 3; grid-row: 2; }
-      .btn-order-cv {
-        grid-column: 1 / 3;
-        grid-row: 3;
-        max-width: 220px;
-        width: 100%;
-        margin: 0 auto;
-      }
-      .gallery-slide { height: 260px; }
-      .sidebar { width: 290px; left: -310px; }
+      .btn-order-cv { grid-column: 1 / 3; max-width: 220px; width: 100%; margin: 0 auto; }
+      .gallery-slide { height: 290px; }
+      .sidebar { width: 286px; left: -300px; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="menu-avatar" onclick="toggleSidebar()">
+    <div class="menu-avatar" id="menuAvatar" onclick="toggleSidebar()">
       <img src="photo.jpg?v=3" alt="Og'abek mini profil rasmi">
+    </div>
+
+    <div class="avatar-clone" id="avatarClone">
+      <img src="photo.jpg?v=3" alt="avatar clone">
     </div>
 
     <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
@@ -640,7 +716,7 @@
     <aside class="sidebar" id="sidebar">
       <button class="close-btn" onclick="closeSidebar()">×</button>
       <div class="side-top">
-        <img src="photo.jpg?v=3" alt="Og'abek rasmi" onclick="openViewer(0)">
+        <img src="photo.jpg?v=3" alt="Og'abek rasmi" id="sidebarAvatar" onclick="openViewer(0)">
         <div>
           <div class="side-name">Og‘abek Rahmatjonov</div>
           <div class="side-role">Junior Developer<br>Fullstack o‘rganuvchi</div>
@@ -657,127 +733,115 @@
       </div>
 
       <div class="side-actions">
-        <button onclick="temaAlmashtir()">🌙 / ☀️ Tema</button>
+        <button onclick="temaAlmashtir()">🌗 Theme</button>
         <button onclick="tilAlmashtir()">UZ / EN</button>
       </div>
     </aside>
 
     <div class="toolbar">
-      <button class="toggle" onclick="temaAlmashtir()">🌙 / ☀️ Tema</button>
-      <button class="toggle" onclick="tilAlmashtir()">UZ / EN</button>
+      <button onclick="temaAlmashtir()">🌗 Theme</button>
+      <button onclick="tilAlmashtir()">UZ / EN</button>
     </div>
 
     <section id="homePage" class="show-section">
-      <div class="card">
-        <div class="top">
-          <div class="rasm">
-            <img src="photo.jpg?v=3" alt="Og'abek rasmi">
-          </div>
-
+      <div class="hero">
+        <div class="hero-grid">
           <div>
-            <h1 id="ism">Og‘abek Rahmatjonov</h1>
-            <div class="kasb" id="kasb">Junior Developer • Fullstack o‘rganuvchi • Ambitsiyali yosh mutaxassis</div>
-            <div class="text" id="aboutText">
-              Men startup g‘oyalari, texnologiya va rivojlanishga qiziqaman. Word, PDF, HTML va kompyuter bilan ishlashni bilaman. Tez o‘rganaman, mas’uliyat bilan ishlayman va yangi imkoniyatlarga doim ochiqman.
+            <div class="eyebrow">refine</div>
+            <div class="hero-title" id="heroTitle">Portfolio</div>
+            <div class="hero-sub" id="aboutText">
+              Men startup g‘oyalari, texnologiya va rivojlanishga qiziqaman. Word, PDF, HTML va kompyuter bilan ishlay olaman. Tez o‘rganaman, mas’uliyat bilan ishlayman va yangi imkoniyatlarga doim ochiqman.
             </div>
 
-            <div class="btns">
-              <a class="btn btn-download btn-order-cv" href="cv.pdf" download id="cvBtn">⬇️ CV yuklab olish</a>
-              <a class="btn btn1 btn-order-call" href="tel:+998505529515" id="callBtn">📞 Qo‘ng‘iroq</a>
-              <a class="btn btn2 btn-order-email" href="mailto:ogabekrahmatjonov112@gmail.com" id="emailBtn">📧 Email</a>
-              <a class="btn btn3 btn-order-tg" href="https://t.me/Ogabek_Rahmatjonov" target="_blank" id="tgBtn">💬 Telegram</a>
-              <a class="btn btn4 btn-order-ig" href="https://www.instagram.com/uzdof/" target="_blank" id="igBtn">📸 Instagram</a>
+            <div class="hero-actions btns">
+              <a class="hero-btn primary btn-order-tg" href="https://t.me/Ogabek_Rahmatjonov" target="_blank" id="tgBtn">Telegram</a>
+              <a class="hero-btn btn-order-ig" href="https://www.instagram.com/uzdof/" target="_blank" id="igBtn">Instagram</a>
+              <a class="hero-btn btn-order-call" href="tel:+998505529515" id="callBtn">Qo‘ng‘iroq</a>
+              <a class="hero-btn btn-order-email" href="mailto:ogabekrahmatjonov112@gmail.com" id="emailBtn">Email</a>
+              <a class="hero-btn btn-order-cv" href="cv.pdf" download id="cvBtn">⬇ CV</a>
+            </div>
+          </div>
+
+          <div class="hero-showcase">
+            <div class="showcase-grid">
+              <div class="mini-card">
+                <div>
+                  <div class="mini-top"><span>Personal Card</span><span>#01</span></div>
+                  <div class="hero-photo"><img src="photo.jpg?v=3" alt="profile"></div>
+                  <div class="mini-title"><span>Og‘abek</span><br>Rahmatjonov</div>
+                </div>
+                <div class="mini-bottom"><span class="pill">Developer</span><span>2026</span></div>
+              </div>
+
+              <div class="mini-card">
+                <div>
+                  <div class="mini-top"><span>Current Focus</span><span>#02</span></div>
+                  <div class="mini-title">Creative<br><span>Portfolio</span></div>
+                  <p class="muted-note" style="margin-top:10px;">Shaxsiy brend, portfolio va rivojlanish yo‘li.</p>
+                </div>
+                <div class="mini-bottom"><span class="pill">Built to Inspire</span><span>Live</span></div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="grid">
-          <div class="box">
-            <h2 id="skillsTitle">Ko‘nikmalar</h2>
-            <div class="skill">
-              <span><b id="skill1">Microsoft Word / PDF</b> <b>90%</b></span>
-              <div class="bar"><div class="fill f1"></div></div>
-            </div>
-            <div class="skill">
-              <span><b id="skill2">HTML / CSS</b> <b>82%</b></span>
-              <div class="bar"><div class="fill f2"></div></div>
-            </div>
-            <div class="skill">
-              <span><b id="skill3">JavaScript</b> <b>70%</b></span>
-              <div class="bar"><div class="fill f3"></div></div>
-            </div>
-            <div class="skill">
-              <span><b id="skill4">Python (basic)</b> <b>60%</b></span>
-              <div class="bar"><div class="fill f4"></div></div>
-            </div>
-            <div class="skill">
-              <span><b id="skill5">YouTube kontent</b> <b>75%</b></span>
-              <div class="bar"><div class="fill f2"></div></div>
-            </div>
-            <div class="skill">
-              <span><b id="skill6">Matematika</b> <b>78%</b></span>
-              <div class="bar"><div class="fill f1"></div></div>
-            </div>
-            <div class="skill">
-              <span><b id="skill7">Sport</b> <b>85%</b></span>
-              <div class="bar"><div class="fill f3"></div></div>
-            </div>
-            <div class="skill">
-              <span><b id="skill8">Muammo yechish</b> <b>88%</b></span>
-              <div class="bar"><div class="fill f1"></div></div>
+      <div class="section-title"><span>about</span> skills</div>
+      <div class="section-card">
+        <div class="portfolio-grid" style="grid-template-columns: repeat(2, 1fr);">
+          <div class="project">
+            <h3 id="skillsTitle">Ko‘nikmalar</h3>
+            <p class="muted-note">HTML, CSS, Word, PDF, YouTube, matematika, sport va muammo yechish.</p>
+            <div class="info-list">
+              <div class="info-item"><b id="skill1">Microsoft Word / PDF</b> — 90%</div>
+              <div class="info-item"><b id="skill2">HTML / CSS</b> — 82%</div>
+              <div class="info-item"><b id="skill3">JavaScript</b> — 70%</div>
+              <div class="info-item"><b id="skill4">Python (basic)</b> — 60%</div>
+              <div class="info-item"><b id="skill5">YouTube kontent</b> — 75%</div>
+              <div class="info-item"><b id="skill6">Matematika</b> — 78%</div>
+              <div class="info-item"><b id="skill7">Sport</b> — 85%</div>
+              <div class="info-item"><b id="skill8">Muammo yechish</b> — 88%</div>
             </div>
           </div>
 
-          <div class="box">
-            <h2 id="expTitle">Tajriba</h2>
-            <ul>
-              <li id="exp1">Regicton LC — Savdo menejeri</li>
-              <li id="exp2">Mijozlar bilan ishlash va sotuv</li>
-              <li id="exp3">Startup ustida ishlash</li>
-              <li id="exp4">Yangi narsalarni tez o‘rganish</li>
-            </ul>
-          </div>
-
-          <div class="box">
-            <h2 id="eduTitle">Ta’lim</h2>
-            <ul>
-              <li id="edu1">Najot Ta’lim — Fullstack</li>
-              <li id="edu2">Cambridge — Ingliz tili</li>
-              <li id="edu3">AIFU Universiteti</li>
-            </ul>
-          </div>
-
-          <div class="box">
-            <h2 id="langTitle">Tillar</h2>
-            <ul>
-              <li id="lang1">O‘zbek — mukammal</li>
-              <li id="lang2">Ingliz — o‘rganmoqda</li>
-              <li id="lang3">Rus — boshlang‘ich</li>
-            </ul>
+          <div class="project">
+            <h3 id="expTitle">Tajriba</h3>
+            <div class="info-list">
+              <div class="info-item" id="exp1"><b>Regicton LC</b> — Savdo menejeri</div>
+              <div class="info-item" id="exp2">Mijozlar bilan ishlash va sotuv</div>
+              <div class="info-item" id="exp3">Startup ustida ishlash</div>
+              <div class="info-item" id="exp4">Yangi narsalarni tez o‘rganish</div>
+              <div class="info-item" id="edu1"><b>Najot Ta’lim</b> — Fullstack</div>
+              <div class="info-item" id="edu2"><b>Cambridge</b> — Ingliz tili</div>
+              <div class="info-item" id="edu3"><b>AIFU</b> — Universitet</div>
+              <div class="info-item" id="lang1"><b>O‘zbek</b> — mukammal</div>
+            </div>
           </div>
         </div>
-
-        <div class="past" id="footerText">© 2026 Og‘abek Rahmatjonov — Personal CV Website</div>
+        <div class="past" id="footerText">© 2026 Og‘abek Rahmatjonov — Personal Portfolio</div>
       </div>
     </section>
 
     <section id="portfolioPage" class="hidden-section">
+      <div class="section-title"><span>visuals</span> portfolio</div>
       <div class="section-card">
-        <h2 id="portfolioTitle">Portfolio</h2>
-        <div class="portfolio">
+        <div class="portfolio-grid">
           <div class="project">
+            <div class="project-image"><img src="photo.jpg?v=3" alt="project 1"></div>
             <h3 id="p1t">Mini CV Website</h3>
             <p id="p1d">O‘zim haqimda qisqa ma’lumot, bog‘lanish tugmalari va zamonaviy dizayndagi shaxsiy sayt.</p>
             <a class="plink" href="https://rahmatjonov-ogabek.github.io/Mini_Site/" target="_blank" id="p1b">Ko‘rish</a>
           </div>
 
           <div class="project">
+            <div class="project-image"><img src="photo2.jpg?v=1" alt="project 2" onerror="this.src='photo.jpg?v=3'"></div>
             <h3 id="p2t">Startup G‘oya</h3>
             <p id="p2d">Texnologiya va foydalanuvchi tajribasiga yo‘naltirilgan yangi loyiha konsepsiyasi ustida ishlash.</p>
             <a class="plink" href="https://t.me/Ogabek_Rahmatjonov" target="_blank" id="p2b">Bog‘lanish</a>
           </div>
 
           <div class="project">
+            <div class="project-image"><img src="photo3.jpg?v=1" alt="project 3" onerror="this.src='photo.jpg?v=3'"></div>
             <h3 id="p3t">Kontent va Outreach</h3>
             <p id="p3d">Kontent, mualliflar, ijtimoiy tarmoqlar va onlayn aloqa jarayonlariga qiziqish va tajriba.</p>
             <a class="plink" href="https://www.instagram.com/uzdof/" target="_blank" id="p3b">Instagram</a>
@@ -787,14 +851,13 @@
     </section>
 
     <section id="aboutPage" class="hidden-section">
+      <div class="section-title"><span>about</span> profile</div>
       <div class="section-card">
-        <h2 id="aboutPageTitle">Men haqimda</h2>
         <div class="about-grid">
           <div>
             <div class="about-text" id="aboutFullText">
               Men rivojlanishga chanqoq, texnologiya va startup g‘oyalariga qiziqadigan yosh mutaxassisman. Yangi narsalarni tez o‘rganaman, mas’uliyat bilan ishlayman va kelajakda katta loyihalar ustida ishlashni xohlayman.
             </div>
-
             <div class="info-list">
               <div class="info-item"><b id="ageLabel">Yoshim:</b> <span id="ageValue">19</span></div>
               <div class="info-item"><b id="yearLabel">Tug‘ilgan yilim:</b> <span id="yearValue">2006</span></div>
@@ -817,9 +880,7 @@
               <button class="gallery-btn" onclick="oldSlide()">‹</button>
               <button class="gallery-btn" onclick="nextSlide()">›</button>
             </div>
-            <div class="gallery-note" id="galleryNote" style="margin-top: 12px; text-align: center;">
-              Rasmlarni chapga yoki o‘ngga aylantirish mumkin.
-            </div>
+            <div class="muted-note" id="galleryNote" style="margin-top: 12px; text-align: center;">Rasmlarni chapga yoki o‘ngga aylantirish mumkin.</div>
           </div>
         </div>
       </div>
@@ -845,73 +906,128 @@
 
   <script>
     function temaAlmashtir() {
-      document.body.classList.toggle('light');
+      document.body.classList.toggle('dark');
     }
 
     function toggleSidebar() {
       const sidebar = document.getElementById('sidebar');
+      if (sidebar.classList.contains('open')) closeSidebar();
+      else openSidebarAnimated();
+    }
+
+    function openSidebarAnimated() {
+      const sidebar = document.getElementById('sidebar');
       const overlay = document.getElementById('overlay');
-      const avatar = document.querySelector('.menu-avatar');
-      sidebar.classList.toggle('open');
-      overlay.classList.toggle('open');
-      avatar.classList.toggle('to-sidebar');
+      const avatar = document.getElementById('menuAvatar');
+      const sidebarAvatar = document.getElementById('sidebarAvatar');
+      const clone = document.getElementById('avatarClone');
+      const from = avatar.getBoundingClientRect();
+
+      sidebar.classList.add('open');
+      overlay.classList.add('open');
+
+      requestAnimationFrame(() => {
+        const to = sidebarAvatar.getBoundingClientRect();
+        clone.style.left = from.left + 'px';
+        clone.style.top = from.top + 'px';
+        clone.style.width = from.width + 'px';
+        clone.style.height = from.height + 'px';
+        clone.style.opacity = '1';
+        avatar.classList.add('hidden-avatar');
+        sidebarAvatar.style.opacity = '0';
+
+        clone.animate([
+          { left: from.left + 'px', top: from.top + 'px', width: from.width + 'px', height: from.height + 'px', opacity: 1 },
+          { left: to.left + 'px', top: to.top + 'px', width: to.width + 'px', height: to.height + 'px', opacity: 1 }
+        ], {
+          duration: 220,
+          easing: 'ease-out',
+          fill: 'forwards'
+        });
+
+        setTimeout(() => {
+          clone.style.opacity = '0';
+          sidebarAvatar.style.opacity = '1';
+        }, 230);
+      });
     }
 
     function closeSidebar() {
-      document.getElementById('sidebar').classList.remove('open');
-      document.getElementById('overlay').classList.remove('open');
-      document.querySelector('.menu-avatar').classList.remove('to-sidebar');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const avatar = document.getElementById('menuAvatar');
+      const sidebarAvatar = document.getElementById('sidebarAvatar');
+      const clone = document.getElementById('avatarClone');
+      const from = sidebarAvatar.getBoundingClientRect();
+      const to = avatar.getBoundingClientRect();
+
+      sidebarAvatar.style.opacity = '0';
+      sidebar.classList.remove('open');
+      overlay.classList.remove('open');
+
+      setTimeout(() => {
+        clone.style.left = from.left + 'px';
+        clone.style.top = from.top + 'px';
+        clone.style.width = from.width + 'px';
+        clone.style.height = from.height + 'px';
+        clone.style.opacity = '1';
+
+        clone.animate([
+          { left: from.left + 'px', top: from.top + 'px', width: from.width + 'px', height: from.height + 'px', opacity: 1 },
+          { left: to.left + 'px', top: to.top + 'px', width: to.width + 'px', height: to.height + 'px', opacity: 1 }
+        ], {
+          duration: 200,
+          easing: 'ease-in-out',
+          fill: 'forwards'
+        });
+
+        setTimeout(() => {
+          clone.style.opacity = '0';
+          avatar.classList.remove('hidden-avatar');
+          sidebarAvatar.style.opacity = '1';
+        }, 205);
+      }, 170);
     }
 
     function showPage(page) {
       document.getElementById('homePage').className = 'hidden-section';
       document.getElementById('portfolioPage').className = 'hidden-section';
       document.getElementById('aboutPage').className = 'hidden-section';
-
       if (page === 'home') document.getElementById('homePage').className = 'show-section';
       if (page === 'portfolio') document.getElementById('portfolioPage').className = 'show-section';
       if (page === 'about') document.getElementById('aboutPage').className = 'show-section';
-
       closeSidebar();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     let hozirgiTil = 'uz';
-
     function tilAlmashtir() {
       if (hozirgiTil === 'uz') {
         document.documentElement.lang = 'en';
-        document.getElementById('kasb').textContent = 'Junior Developer • Fullstack Learner • Ambitious Young Specialist';
-        document.getElementById('aboutText').textContent = 'I am a young specialist interested in startup ideas, technology and growth. I can work with Word, PDF, HTML and computers. I learn fast, work responsibly and stay open to new opportunities.';
-        document.getElementById('cvBtn').textContent = '⬇️ Download CV';
-        document.getElementById('callBtn').textContent = '📞 Call';
-        document.getElementById('emailBtn').textContent = '📧 Email';
+        document.getElementById('heroTitle').textContent = 'Portfolio';
+        document.getElementById('aboutText').textContent = 'I am interested in startup ideas, technology and growth. I can work with Word, PDF, HTML and computers. I learn fast, work responsibly and stay open to new opportunities.';
+        document.getElementById('cvBtn').textContent = '⬇ CV';
+        document.getElementById('callBtn').textContent = 'Call';
+        document.getElementById('emailBtn').textContent = 'Email';
         document.getElementById('skillsTitle').textContent = 'Skills';
-        document.getElementById('skill4').textContent = 'Python (basic)';
         document.getElementById('skill5').textContent = 'YouTube content';
         document.getElementById('skill6').textContent = 'Mathematics';
         document.getElementById('skill7').textContent = 'Sports';
         document.getElementById('skill8').textContent = 'Problem solving';
         document.getElementById('expTitle').textContent = 'Experience';
-        document.getElementById('exp1').textContent = 'Regicton LC — Sales Manager';
+        document.getElementById('exp1').innerHTML = '<b>Regicton LC</b> — Sales Manager';
         document.getElementById('exp2').textContent = 'Client communication and sales';
         document.getElementById('exp3').textContent = 'Working on a startup';
         document.getElementById('exp4').textContent = 'Fast learner';
-        document.getElementById('eduTitle').textContent = 'Education';
-        document.getElementById('langTitle').textContent = 'Languages';
-        document.getElementById('lang1').textContent = 'Uzbek — fluent';
-        document.getElementById('lang2').textContent = 'English — learning';
-        document.getElementById('lang3').textContent = 'Russian — beginner';
-        document.getElementById('portfolioTitle').textContent = 'Portfolio';
-        document.getElementById('p1d').textContent = 'A personal website with short information about me, contact buttons and a modern design.';
+        document.getElementById('p1d').textContent = 'A modern personal website with short information and contact buttons.';
         document.getElementById('p1b').textContent = 'View';
         document.getElementById('p2t').textContent = 'Startup Idea';
-        document.getElementById('p2d').textContent = 'Working on a new project concept focused on technology and user experience.';
+        document.getElementById('p2d').textContent = 'A concept focused on technology and user experience.';
         document.getElementById('p2b').textContent = 'Contact';
-        document.getElementById('p3t').textContent = 'Content and Outreach';
-        document.getElementById('p3d').textContent = 'Interest and experience in content, authors, social media and online communication.';
+        document.getElementById('p3t').textContent = 'Content & Outreach';
+        document.getElementById('p3d').textContent = 'Interest and experience in content, social media and online communication.';
         document.getElementById('aboutPageTitle').textContent = 'About Me';
-        document.getElementById('aboutFullText').textContent = 'I am a young specialist who is eager to grow and interested in technology and startup ideas. I learn quickly, work responsibly and want to build major projects in the future.';
+        document.getElementById('aboutFullText').textContent = 'I am a young specialist interested in technology and startup ideas. I learn quickly, work responsibly and want to build major projects in the future.';
         document.getElementById('ageLabel').textContent = 'Age:';
         document.getElementById('yearLabel').textContent = 'Birth Year:';
         document.getElementById('eduLabel2').textContent = 'Education:';
@@ -921,32 +1037,25 @@
         document.getElementById('goalLabel').textContent = 'Goal:';
         document.getElementById('goalValue').textContent = 'To become a strong developer and build major projects.';
         document.getElementById('galleryNote').textContent = 'You can move the photos left or right.';
-        document.getElementById('footerText').textContent = '© 2026 Og‘abek Rahmatjonov — Personal CV Website';
+        document.getElementById('footerText').textContent = '© 2026 Og‘abek Rahmatjonov — Personal Portfolio';
         hozirgiTil = 'en';
       } else {
         document.documentElement.lang = 'uz';
-        document.getElementById('kasb').textContent = 'Junior Developer • Fullstack o‘rganuvchi • Ambitsiyali yosh mutaxassis';
-        document.getElementById('aboutText').textContent = 'Men startup g‘oyalari, texnologiya va rivojlanishga qiziqaman. Word, PDF, HTML va kompyuter bilan ishlashni bilaman. Tez o‘rganaman, mas’uliyat bilan ishlayman va yangi imkoniyatlarga doim ochiqman.';
-        document.getElementById('cvBtn').textContent = '⬇️ CV yuklab olish';
-        document.getElementById('callBtn').textContent = '📞 Qo‘ng‘iroq';
-        document.getElementById('emailBtn').textContent = '📧 Email';
+        document.getElementById('heroTitle').textContent = 'Portfolio';
+        document.getElementById('aboutText').textContent = 'Men startup g‘oyalari, texnologiya va rivojlanishga qiziqaman. Word, PDF, HTML va kompyuter bilan ishlay olaman. Tez o‘rganaman, mas’uliyat bilan ishlayman va yangi imkoniyatlarga doim ochiqman.';
+        document.getElementById('cvBtn').textContent = '⬇ CV';
+        document.getElementById('callBtn').textContent = 'Qo‘ng‘iroq';
+        document.getElementById('emailBtn').textContent = 'Email';
         document.getElementById('skillsTitle').textContent = 'Ko‘nikmalar';
-        document.getElementById('skill4').textContent = 'Python (basic)';
         document.getElementById('skill5').textContent = 'YouTube kontent';
         document.getElementById('skill6').textContent = 'Matematika';
         document.getElementById('skill7').textContent = 'Sport';
         document.getElementById('skill8').textContent = 'Muammo yechish';
         document.getElementById('expTitle').textContent = 'Tajriba';
-        document.getElementById('exp1').textContent = 'Regicton LC — Savdo menejeri';
+        document.getElementById('exp1').innerHTML = '<b>Regicton LC</b> — Savdo menejeri';
         document.getElementById('exp2').textContent = 'Mijozlar bilan ishlash va sotuv';
         document.getElementById('exp3').textContent = 'Startup ustida ishlash';
         document.getElementById('exp4').textContent = 'Yangi narsalarni tez o‘rganish';
-        document.getElementById('eduTitle').textContent = 'Ta’lim';
-        document.getElementById('langTitle').textContent = 'Tillar';
-        document.getElementById('lang1').textContent = 'O‘zbek — mukammal';
-        document.getElementById('lang2').textContent = 'Ingliz — o‘rganmoqda';
-        document.getElementById('lang3').textContent = 'Rus — boshlang‘ich';
-        document.getElementById('portfolioTitle').textContent = 'Portfolio';
         document.getElementById('p1d').textContent = 'O‘zim haqimda qisqa ma’lumot, bog‘lanish tugmalari va zamonaviy dizayndagi shaxsiy sayt.';
         document.getElementById('p1b').textContent = 'Ko‘rish';
         document.getElementById('p2t').textContent = 'Startup G‘oya';
@@ -965,7 +1074,7 @@
         document.getElementById('goalLabel').textContent = 'Maqsad:';
         document.getElementById('goalValue').textContent = 'Kuchli developer bo‘lish va katta loyihalar yaratish.';
         document.getElementById('galleryNote').textContent = 'Rasmlarni chapga yoki o‘ngga aylantirish mumkin.';
-        document.getElementById('footerText').textContent = '© 2026 Og‘abek Rahmatjonov — Personal CV Website';
+        document.getElementById('footerText').textContent = '© 2026 Og‘abek Rahmatjonov — Personal Portfolio';
         hozirgiTil = 'uz';
       }
     }
@@ -974,69 +1083,26 @@
     const slides = Array.from(track.children);
     let currentIndex = 0;
     let autoSlide;
-
-    function updateGallery() {
-      track.style.transform = `translateX(-${currentIndex * 100}%)`;
-    }
-
-    function nextSlide() {
-      currentIndex = (currentIndex + 1) % slides.length;
-      updateGallery();
-      restartAuto();
-    }
-
-    function oldSlide() {
-      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-      updateGallery();
-      restartAuto();
-    }
-
-    function startAuto() {
-      autoSlide = setInterval(() => {
-        currentIndex = (currentIndex + 1) % slides.length;
-        updateGallery();
-      }, 2800);
-    }
-
-    function restartAuto() {
-      clearInterval(autoSlide);
-      startAuto();
-    }
+    function updateGallery() { track.style.transform = `translateX(-${currentIndex * 100}%)`; }
+    function nextSlide() { currentIndex = (currentIndex + 1) % slides.length; updateGallery(); restartAuto(); }
+    function oldSlide() { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateGallery(); restartAuto(); }
+    function startAuto() { autoSlide = setInterval(() => { currentIndex = (currentIndex + 1) % slides.length; updateGallery(); }, 2800); }
+    function restartAuto() { clearInterval(autoSlide); startAuto(); }
 
     const viewerOverlay = document.getElementById('viewerOverlay');
     const viewerTrack = document.getElementById('viewerTrack');
     let viewerIndex = 0;
     const viewerTotal = 3;
-
-    function updateViewer() {
-      viewerTrack.style.transform = `translateX(-${viewerIndex * 100}%)`;
-    }
-
-    function openViewer(index = 0) {
-      viewerIndex = index;
-      updateViewer();
-      viewerOverlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
+    function updateViewer() { viewerTrack.style.transform = `translateX(-${viewerIndex * 100}%)`; }
+    function openViewer(index = 0) { viewerIndex = index; updateViewer(); viewerOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
     function closeViewer(event) {
       if (!event || event.target.id === 'viewerOverlay' || event.target.classList.contains('viewer-close')) {
         viewerOverlay.classList.remove('open');
         document.body.style.overflow = '';
       }
     }
-
-    function viewerNext(event) {
-      event.stopPropagation();
-      viewerIndex = (viewerIndex + 1) % viewerTotal;
-      updateViewer();
-    }
-
-    function viewerPrev(event) {
-      event.stopPropagation();
-      viewerIndex = (viewerIndex - 1 + viewerTotal) % viewerTotal;
-      updateViewer();
-    }
+    function viewerNext(event) { event.stopPropagation(); viewerIndex = (viewerIndex + 1) % viewerTotal; updateViewer(); }
+    function viewerPrev(event) { event.stopPropagation(); viewerIndex = (viewerIndex - 1 + viewerTotal) % viewerTotal; updateViewer(); }
 
     document.addEventListener('keydown', function(e) {
       if (viewerOverlay.classList.contains('open')) {
