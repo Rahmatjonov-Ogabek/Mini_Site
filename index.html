@@ -5,11 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Og'abek Rahmatjonov | CV</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
       --bg1: #020617;
@@ -33,9 +29,9 @@
       --bg3: #f8fafc;
       --text: #0f172a;
       --muted: #334155;
-      --card: rgba(255,255,255,0.72);
+      --card: rgba(255,255,255,0.76);
       --border: rgba(15,23,42,0.08);
-      --box: rgba(255,255,255,0.65);
+      --box: rgba(255,255,255,0.7);
       --shadow: 0 20px 60px rgba(15,23,42,0.12);
     }
 
@@ -45,16 +41,180 @@
         radial-gradient(circle at top left, rgba(59,130,246,0.18), transparent 28%),
         radial-gradient(circle at bottom right, rgba(168,85,247,0.18), transparent 24%),
         linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+      background-attachment: fixed;
+      background-repeat: no-repeat;
       color: var(--text);
       min-height: 100vh;
-      padding: 20px;
+      padding: 18px;
       transition: 0.35s ease;
+      overflow-x: hidden;
+    }
+
+    html {
+      min-height: 100%;
+      background:
+        radial-gradient(circle at top left, rgba(59,130,246,0.18), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(168,85,247,0.18), transparent 24%),
+        linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    .menu-avatar {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.25);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      cursor: pointer;
+      z-index: 1200;
+      background: #111827;
+      transition: transform 0.45s ease, opacity 0.3s ease, top 0.45s ease, left 0.45s ease, width 0.45s ease, height 0.45s ease;
+      transform-origin: top left;
+    }
+
+    .menu-avatar.to-sidebar {
+      top: 36px;
+      left: 36px;
+      width: 58px;
+      height: 58px;
+      opacity: 0.08;
+      transform: scale(1.05);
+      pointer-events: none;
+    }
+
+    .menu-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s ease;
+      z-index: 1090;
+    }
+
+    .overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -320px;
+      width: 300px;
+      height: 100vh;
+      background: rgba(15,23,42,0.96);
+      border-right: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(12px);
+      z-index: 1100;
+      transition: 0.35s ease;
+      padding: 18px;
+      overflow-y: auto;
+    }
+
+    body.light .sidebar {
+      background: rgba(255,255,255,0.95);
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .side-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding-right: 36px;
+    }
+
+    .side-top img {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255,255,255,0.18);
+      cursor: pointer;
+      transition: transform 0.25s ease;
+    }
+
+    .side-top img:hover {
+      transform: scale(1.06);
+    }
+
+    .side-name {
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .side-role {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 16px;
+      right: 14px;
+      border: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    .side-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .side-link {
+      border: 1px solid var(--border);
+      background: var(--box);
+      color: var(--text);
+      text-decoration: none;
+      padding: 14px 16px;
+      border-radius: 14px;
+      cursor: pointer;
+      text-align: left;
+      font-size: 15px;
+    }
+
+    .side-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .side-actions button {
+      border: 1px solid var(--border);
+      background: var(--box);
+      color: var(--text);
+      padding: 12px 10px;
+      border-radius: 12px;
+      cursor: pointer;
     }
 
     .wrap {
       width: 100%;
       max-width: 1080px;
-      margin: 0 auto;
+      margin: 60px auto 0;
     }
 
     .toolbar {
@@ -77,7 +237,7 @@
       transition: 0.25s ease;
     }
 
-    .card {
+    .card, .section-card {
       width: 100%;
       background: var(--card);
       backdrop-filter: blur(14px);
@@ -90,7 +250,9 @@
       overflow: hidden;
     }
 
-    .card::before {
+    .section-card { margin-top: 22px; }
+
+    .card::before, .section-card::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -99,14 +261,8 @@
     }
 
     @keyframes chiqish {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .top {
@@ -127,38 +283,20 @@
       border: 4px solid rgba(255,255,255,0.18);
       background: #1f2937;
       margin: 0 auto;
-      box-shadow:
-        0 0 0 8px rgba(255,255,255,0.04),
-        0 0 35px rgba(59,130,246,0.22),
-        0 0 55px rgba(168,85,247,0.16);
+      box-shadow: 0 0 0 8px rgba(255,255,255,0.04), 0 0 35px rgba(59,130,246,0.22), 0 0 55px rgba(168,85,247,0.16);
       animation: glow 3s infinite alternate ease-in-out;
     }
 
     @keyframes glow {
-      from {
-        box-shadow:
-          0 0 0 8px rgba(255,255,255,0.04),
-          0 0 30px rgba(59,130,246,0.18),
-          0 0 45px rgba(168,85,247,0.12);
-      }
-      to {
-        box-shadow:
-          0 0 0 10px rgba(255,255,255,0.05),
-          0 0 42px rgba(59,130,246,0.26),
-          0 0 68px rgba(168,85,247,0.2);
-      }
+      from { box-shadow: 0 0 0 8px rgba(255,255,255,0.04), 0 0 30px rgba(59,130,246,0.18), 0 0 45px rgba(168,85,247,0.12); }
+      to { box-shadow: 0 0 0 10px rgba(255,255,255,0.05), 0 0 42px rgba(59,130,246,0.26), 0 0 68px rgba(168,85,247,0.2); }
     }
 
-    .rasm img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    .rasm img { width: 100%; height: 100%; object-fit: cover; }
 
-    h1 {
-      font-size: 42px;
-      margin-bottom: 8px;
-    }
+    h1 { font-size: 42px; margin-bottom: 8px; }
+    h2 { font-size: 24px; margin-bottom: 16px; }
+    h3 { font-size: 18px; margin-bottom: 10px; }
 
     .kasb {
       font-size: 18px;
@@ -166,14 +304,11 @@
       margin-bottom: 12px;
     }
 
-    body.light .kasb {
-      color: #2563eb;
-    }
+    body.light .kasb { color: #2563eb; }
 
-    .text {
+    .text, .about-text, .gallery-note {
       color: var(--muted);
       line-height: 1.8;
-      max-width: 720px;
     }
 
     .btns {
@@ -181,10 +316,13 @@
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
+      align-items: stretch;
     }
 
     .btn {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       padding: 12px 18px;
       border-radius: 12px;
       text-decoration: none;
@@ -192,14 +330,23 @@
       font-weight: bold;
       transition: 0.25s ease;
       box-shadow: 0 10px 24px rgba(0,0,0,0.16);
+      min-height: 48px;
+      text-align: center;
     }
 
     .btn1 { background: var(--accent1); }
     .btn2 { background: var(--accent2); }
     .btn3 { background: var(--accent3); }
     .btn4 { background: linear-gradient(135deg, #f97316, var(--accent4), #7c3aed); }
+    .btn-download {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      min-width: 130px;
+      padding: 10px 14px;
+      font-size: 14px;
+    }
 
-    .btn:hover, .toggle:hover {
+    .btn:hover, .toggle:hover, .side-link:hover, .side-actions button:hover, .gallery-btn:hover {
       transform: translateY(-3px) scale(1.02);
       opacity: 0.96;
     }
@@ -222,27 +369,11 @@
       transition: 0.25s ease;
     }
 
-    .box:hover, .project:hover {
-      transform: translateY(-5px);
-      border-color: rgba(255,255,255,0.18);
-    }
+    .box:hover, .project:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.18); }
 
-    .box h2 {
-      font-size: 20px;
-      margin-bottom: 14px;
-      color: var(--text);
-    }
+    .box ul { padding-left: 18px; color: var(--muted); line-height: 1.9; }
 
-    .box ul {
-      padding-left: 18px;
-      color: var(--muted);
-      line-height: 1.9;
-    }
-
-    .skill {
-      margin-bottom: 14px;
-    }
-
+    .skill { margin-bottom: 14px; }
     .skill span {
       display: flex;
       justify-content: space-between;
@@ -270,15 +401,7 @@
     .f3 { width: 68%; background: var(--accent3); }
     .f4 { width: 75%; background: #f59e0b; }
 
-    @keyframes tol {
-      from { width: 0; }
-    }
-
-    .portfolioWrap {
-      margin-top: 24px;
-      position: relative;
-      z-index: 1;
-    }
+    @keyframes tol { from { width: 0; } }
 
     .portfolio {
       display: grid;
@@ -295,17 +418,7 @@
       transition: 0.25s ease;
     }
 
-    .project h3 {
-      margin-bottom: 10px;
-      font-size: 18px;
-    }
-
-    .project p {
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 14px;
-      margin-bottom: 12px;
-    }
+    .project p { color: var(--muted); line-height: 1.7; font-size: 14px; margin-bottom: 12px; }
 
     .plink {
       display: inline-block;
@@ -315,6 +428,162 @@
       padding: 9px 12px;
       border-radius: 10px;
       font-size: 14px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 22px;
+      margin-top: 16px;
+    }
+
+    .info-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .info-item {
+      background: var(--box);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      color: var(--muted);
+    }
+
+    .info-item b { color: var(--text); }
+
+    .gallery-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: var(--box);
+      padding: 14px;
+    }
+
+    .gallery-track {
+      display: flex;
+      gap: 14px;
+      transition: transform 0.45s ease;
+      will-change: transform;
+    }
+
+    .gallery-slide {
+      min-width: calc(100% - 2px);
+      height: 320px;
+      border-radius: 16px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #0b1120;
+    }
+
+    .gallery-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .gallery-btn {
+      border: 1px solid var(--border);
+      background: var(--box);
+      color: var(--text);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .hidden-section { display: none; }
+    .show-section { display: block; }
+
+    .viewer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.82);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1400;
+      padding: 20px;
+    }
+
+    .viewer-overlay.open {
+      display: flex;
+    }
+
+    .viewer-box {
+      width: min(92vw, 920px);
+      background: rgba(15,23,42,0.82);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 22px;
+      padding: 18px;
+      position: relative;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+
+    .viewer-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      border: none;
+      background: transparent;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .viewer-stage {
+      overflow: hidden;
+      border-radius: 18px;
+    }
+
+    .viewer-track {
+      display: flex;
+      transition: transform 0.42s ease;
+    }
+
+    .viewer-slide {
+      min-width: 100%;
+      height: min(72vh, 700px);
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .viewer-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .viewer-controls {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .viewer-btn {
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+      color: white;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
     }
 
     .past {
@@ -327,142 +596,229 @@
     }
 
     @media (max-width: 900px) {
-      .portfolio {
-        grid-template-columns: 1fr;
-      }
+      .portfolio, .about-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 800px) {
-      .top {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      h1 {
-        font-size: 32px;
-      }
-
+      .top { grid-template-columns: 1fr; text-align: center; }
+      .grid { grid-template-columns: 1fr; }
+      h1 { font-size: 32px; }
       .btns {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
         justify-content: center;
       }
+      .btn-order-tg { grid-column: 1 / 2; grid-row: 1; }
+      .btn-order-ig { grid-column: 2 / 3; grid-row: 1; }
+      .btn-order-call { grid-column: 1 / 2; grid-row: 2; }
+      .btn-order-email { grid-column: 2 / 3; grid-row: 2; }
+      .btn-order-cv {
+        grid-column: 1 / 3;
+        grid-row: 3;
+        max-width: 220px;
+        width: 100%;
+        margin: 0 auto;
+      }
+      .gallery-slide { height: 260px; }
+      .sidebar { width: 290px; left: -310px; }
     }
   </style>
 </head>
 <body>
+  <div class="menu-avatar" onclick="toggleSidebar()">
+    <img src="photo.jpg?v=3" alt="Og'abek mini profil rasmi">
+  </div>
+
+  <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="closeSidebar()">×</button>
+    <div class="side-top">
+      <img src="photo.jpg?v=3" alt="Og'abek rasmi" onclick="openViewer(0)">
+      <div>
+        <div class="side-name">Og‘abek Rahmatjonov</div>
+        <div class="side-role">Junior Developer<br>Fullstack o‘rganuvchi</div>
+      </div>
+    </div>
+
+    <div class="side-links">
+      <button class="side-link" onclick="showPage('home')">🏠 Asosiy sahifa</button>
+      <button class="side-link" onclick="showPage('portfolio')">📁 Portfolio</button>
+      <button class="side-link" onclick="showPage('about')">👤 Men haqimda</button>
+      <a class="side-link" href="cv.pdf" download>⬇️ CV yuklab olish</a>
+      <a class="side-link" href="https://t.me/Ogabek_Rahmatjonov" target="_blank">💬 Telegram</a>
+      <a class="side-link" href="https://www.instagram.com/uzdof/" target="_blank">📸 Instagram</a>
+    </div>
+
+    <div class="side-actions">
+      <button onclick="temaAlmashtir()">🌙 / ☀️ Tema</button>
+      <button onclick="tilAlmashtir()">UZ / EN</button>
+    </div>
+  </aside>
+
   <div class="wrap">
     <div class="toolbar">
       <button class="toggle" onclick="temaAlmashtir()">🌙 / ☀️ Tema</button>
       <button class="toggle" onclick="tilAlmashtir()">UZ / EN</button>
     </div>
 
-    <div class="card">
-      <div class="top">
-        <div class="rasm">
-          <img src="photo.jpg?v=2" alt="Og'abek rasmi">
-        </div>
-
-        <div>
-          <h1 id="ism">Og‘abek Rahmatjonov</h1>
-          <div class="kasb" id="kasb">Junior Developer • Fullstack o‘rganuvchi • Ambitsiyali yosh mutaxassis</div>
-          <div class="text" id="aboutText">
-            Men startup g‘oyalari, texnologiya va rivojlanishga qiziqaman. Word, PDF, HTML va kompyuter bilan ishlashni bilaman. Tez o‘rganaman, mas’uliyat bilan ishlayman va yangi imkoniyatlarga doim ochiqman.
+    <section id="homePage" class="show-section">
+      <div class="card">
+        <div class="top">
+          <div class="rasm">
+            <img src="photo.jpg?v=3" alt="Og'abek rasmi">
           </div>
 
-          <div class="btns">
-            <a class="btn btn1" href="cv.pdf" download id="cvBtn">📄 CV yuklab olish</a>
-            <a class="btn btn1" href="tel:+998505529515" id="callBtn">📞 Qo‘ng‘iroq</a>
-            <a class="btn btn2" href="mailto:ogabekrahmatjonov112@gmail.com" id="emailBtn">📧 Email</a>
-            <a class="btn btn3" href="https://t.me/Ogabek_Rahmatjonov" target="_blank" id="tgBtn">💬 Telegram</a>
-            <a class="btn btn4" href="https://www.instagram.com/uzdof/" target="_blank" id="igBtn">📸 Instagram</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid">
-        <div class="box">
-          <h2 id="skillsTitle">Ko‘nikmalar</h2>
-
-          <div class="skill">
-            <span><b id="skill1">Microsoft Word / PDF</b> <b>90%</b></span>
-            <div class="bar"><div class="fill f1"></div></div>
-          </div>
-
-          <div class="skill">
-            <span><b id="skill2">HTML / CSS</b> <b>82%</b></span>
-            <div class="bar"><div class="fill f2"></div></div>
-          </div>
-
-          <div class="skill">
-            <span><b id="skill3">JavaScript</b> <b>68%</b></span>
-            <div class="bar"><div class="fill f3"></div></div>
-          </div>
-
-          <div class="skill">
-            <span><b id="skill4">Kompyuter savodxonligi</b> <b>75%</b></span>
-            <div class="bar"><div class="fill f4"></div></div>
-          </div>
-        </div>
-
-        <div class="box">
-          <h2 id="expTitle">Tajriba</h2>
-          <ul>
-            <li id="exp1">Regicton LC — Savdo menejeri</li>
-            <li id="exp2">Mijozlar bilan ishlash va sotuv</li>
-            <li id="exp3">Startup ustida ishlash</li>
-            <li id="exp4">Yangi narsalarni tez o‘rganish</li>
-          </ul>
-        </div>
-
-        <div class="box">
-          <h2 id="eduTitle">Ta’lim</h2>
-          <ul>
-            <li id="edu1">Najot Ta’lim — Fullstack</li>
-            <li id="edu2">Cambridge — Ingliz tili</li>
-            <li id="edu3">AIFU Universiteti</li>
-          </ul>
-        </div>
-
-        <div class="box">
-          <h2 id="langTitle">Tillar</h2>
-          <ul>
-            <li id="lang1">O‘zbek — mukammal</li>
-            <li id="lang2">Ingliz — o‘rganmoqda</li>
-            <li id="lang3">Rus — boshlang‘ich</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="portfolioWrap">
-        <div class="box">
-          <h2 id="portfolioTitle">Portfolio</h2>
-          <div class="portfolio">
-            <div class="project">
-              <h3 id="p1t">Mini CV Website</h3>
-              <p id="p1d">O‘zim haqimda qisqa ma’lumot, bog‘lanish tugmalari va zamonaviy dizayndagi shaxsiy sayt.</p>
-              <a class="plink" href="https://rahmatjonov-ogabek.github.io/Mini_Site/" target="_blank" id="p1b">Ko‘rish</a>
+          <div>
+            <h1 id="ism">Og‘abek Rahmatjonov</h1>
+            <div class="kasb" id="kasb">Junior Developer • Fullstack o‘rganuvchi • Ambitsiyali yosh mutaxassis</div>
+            <div class="text" id="aboutText">
+              Men startup g‘oyalari, texnologiya va rivojlanishga qiziqaman. Word, PDF, HTML va kompyuter bilan ishlashni bilaman. Tez o‘rganaman, mas’uliyat bilan ishlayman va yangi imkoniyatlarga doim ochiqman.
             </div>
 
-            <div class="project">
-              <h3 id="p2t">Startup G‘oya</h3>
-              <p id="p2d">Texnologiya va foydalanuvchi tajribasiga yo‘naltirilgan yangi loyiha konsepsiyasi ustida ishlash.</p>
-              <a class="plink" href="https://t.me/Ogabek_Rahmatjonov" target="_blank" id="p2b">Bog‘lanish</a>
-            </div>
-
-            <div class="project">
-              <h3 id="p3t">Kontent va Outreach</h3>
-              <p id="p3d">Kontent, mualliflar, ijtimoiy tarmoqlar va onlayn aloqa jarayonlariga qiziqish va tajriba.</p>
-              <a class="plink" href="https://www.instagram.com/uzdof/" target="_blank" id="p3b">Instagram</a>
+            <div class="btns">
+              <a class="btn btn-download btn-order-cv" href="cv.pdf" download id="cvBtn">⬇️ CV yuklab olish</a>
+              <a class="btn btn1 btn-order-call" href="tel:+998505529515" id="callBtn">📞 Qo‘ng‘iroq</a>
+              <a class="btn btn2 btn-order-email" href="mailto:ogabekrahmatjonov112@gmail.com" id="emailBtn">📧 Email</a>
+              <a class="btn btn3 btn-order-tg" href="https://t.me/Ogabek_Rahmatjonov" target="_blank" id="tgBtn">💬 Telegram</a>
+              <a class="btn btn4 btn-order-ig" href="https://www.instagram.com/uzdof/" target="_blank" id="igBtn">📸 Instagram</a>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="past" id="footerText">
-        © 2026 Og‘abek Rahmatjonov — Personal CV Website
+        <div class="grid">
+          <div class="box">
+            <h2 id="skillsTitle">Ko‘nikmalar</h2>
+            <div class="skill">
+              <span><b id="skill1">Microsoft Word / PDF</b> <b>90%</b></span>
+              <div class="bar"><div class="fill f1"></div></div>
+            </div>
+            <div class="skill">
+              <span><b id="skill2">HTML / CSS</b> <b>82%</b></span>
+              <div class="bar"><div class="fill f2"></div></div>
+            </div>
+            <div class="skill">
+              <span><b id="skill3">JavaScript</b> <b>68%</b></span>
+              <div class="bar"><div class="fill f3"></div></div>
+            </div>
+            <div class="skill">
+              <span><b id="skill4">Kompyuter savodxonligi</b> <b>75%</b></span>
+              <div class="bar"><div class="fill f4"></div></div>
+            </div>
+          </div>
+
+          <div class="box">
+            <h2 id="expTitle">Tajriba</h2>
+            <ul>
+              <li id="exp1">Regicton LC — Savdo menejeri</li>
+              <li id="exp2">Mijozlar bilan ishlash va sotuv</li>
+              <li id="exp3">Startup ustida ishlash</li>
+              <li id="exp4">Yangi narsalarni tez o‘rganish</li>
+            </ul>
+          </div>
+
+          <div class="box">
+            <h2 id="eduTitle">Ta’lim</h2>
+            <ul>
+              <li id="edu1">Najot Ta’lim — Fullstack</li>
+              <li id="edu2">Cambridge — Ingliz tili</li>
+              <li id="edu3">AIFU Universiteti</li>
+            </ul>
+          </div>
+
+          <div class="box">
+            <h2 id="langTitle">Tillar</h2>
+            <ul>
+              <li id="lang1">O‘zbek — mukammal</li>
+              <li id="lang2">Ingliz — o‘rganmoqda</li>
+              <li id="lang3">Rus — boshlang‘ich</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="past" id="footerText">© 2026 Og‘abek Rahmatjonov — Personal CV Website</div>
+      </div>
+    </section>
+
+    <section id="portfolioPage" class="hidden-section">
+      <div class="section-card">
+        <h2 id="portfolioTitle">Portfolio</h2>
+        <div class="portfolio">
+          <div class="project">
+            <h3 id="p1t">Mini CV Website</h3>
+            <p id="p1d">O‘zim haqimda qisqa ma’lumot, bog‘lanish tugmalari va zamonaviy dizayndagi shaxsiy sayt.</p>
+            <a class="plink" href="https://rahmatjonov-ogabek.github.io/Mini_Site/" target="_blank" id="p1b">Ko‘rish</a>
+          </div>
+
+          <div class="project">
+            <h3 id="p2t">Startup G‘oya</h3>
+            <p id="p2d">Texnologiya va foydalanuvchi tajribasiga yo‘naltirilgan yangi loyiha konsepsiyasi ustida ishlash.</p>
+            <a class="plink" href="https://t.me/Ogabek_Rahmatjonov" target="_blank" id="p2b">Bog‘lanish</a>
+          </div>
+
+          <div class="project">
+            <h3 id="p3t">Kontent va Outreach</h3>
+            <p id="p3d">Kontent, mualliflar, ijtimoiy tarmoqlar va onlayn aloqa jarayonlariga qiziqish va tajriba.</p>
+            <a class="plink" href="https://www.instagram.com/uzdof/" target="_blank" id="p3b">Instagram</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="aboutPage" class="hidden-section">
+      <div class="section-card">
+        <h2 id="aboutPageTitle">Men haqimda</h2>
+        <div class="about-grid">
+          <div>
+            <div class="about-text" id="aboutFullText">
+              Men rivojlanishga chanqoq, texnologiya va startup g‘oyalariga qiziqadigan yosh mutaxassisman. Yangi narsalarni tez o‘rganaman, mas’uliyat bilan ishlayman va kelajakda katta loyihalar ustida ishlashni xohlayman.
+            </div>
+
+            <div class="info-list">
+              <div class="info-item"><b id="ageLabel">Yoshim:</b> <span id="ageValue">19</span></div>
+              <div class="info-item"><b id="yearLabel">Tug‘ilgan yilim:</b> <span id="yearValue">2006</span></div>
+              <div class="info-item"><b id="eduLabel2">Ta’lim:</b> <span id="eduValue2">Najot Ta’lim, Cambridge, AIFU</span></div>
+              <div class="info-item"><b id="langLabel2">Tillar:</b> <span id="langValue2">O‘zbek, Ingliz, Rus</span></div>
+              <div class="info-item"><b id="familyLabel">Oila:</b> <span id="familyValue">Oilam men uchun juda muhim, yaqinlarimni qadrlayman.</span></div>
+              <div class="info-item"><b id="goalLabel">Maqsad:</b> <span id="goalValue">Kuchli developer bo‘lish va katta loyihalar yaratish.</span></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="gallery-wrap">
+              <div class="gallery-track" id="galleryTrack">
+                <div class="gallery-slide"><img src="photo.jpg?v=3" alt="Photo 1" onclick="openViewer(0)"></div>
+                <div class="gallery-slide"><img src="photo2.jpg?v=1" alt="Photo 2" onclick="openViewer(1)" onerror="this.src='photo.jpg?v=3'"></div>
+                <div class="gallery-slide"><img src="photo3.jpg?v=1" alt="Photo 3" onclick="openViewer(2)" onerror="this.src='photo.jpg?v=3'"></div>
+              </div>
+            </div>
+            <div class="gallery-controls">
+              <button class="gallery-btn" onclick="oldSlide()">‹</button>
+              <button class="gallery-btn" onclick="nextSlide()">›</button>
+            </div>
+            <div class="gallery-note" id="galleryNote" style="margin-top: 12px; text-align: center;">
+              Rasmlarni chapga yoki o‘ngga aylantirish mumkin.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="viewer-overlay" id="viewerOverlay" onclick="closeViewer(event)">
+      <div class="viewer-box">
+        <button class="viewer-close" onclick="closeViewer(event)">×</button>
+        <div class="viewer-stage">
+          <div class="viewer-track" id="viewerTrack">
+            <div class="viewer-slide"><img src="photo.jpg?v=3" alt="Viewer 1"></div>
+            <div class="viewer-slide"><img src="photo2.jpg?v=1" alt="Viewer 2" onerror="this.src='photo.jpg?v=3'"></div>
+            <div class="viewer-slide"><img src="photo3.jpg?v=1" alt="Viewer 3" onerror="this.src='photo.jpg?v=3'"></div>
+          </div>
+        </div>
+        <div class="viewer-controls">
+          <button class="viewer-btn" onclick="viewerPrev(event)">‹</button>
+          <button class="viewer-btn" onclick="viewerNext(event)">›</button>
+        </div>
       </div>
     </div>
   </div>
@@ -472,6 +828,34 @@
       document.body.classList.toggle('light');
     }
 
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const avatar = document.querySelector('.menu-avatar');
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('open');
+      avatar.classList.toggle('to-sidebar');
+    }
+
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('overlay').classList.remove('open');
+      document.querySelector('.menu-avatar').classList.remove('to-sidebar');
+    }
+
+    function showPage(page) {
+      document.getElementById('homePage').className = 'hidden-section';
+      document.getElementById('portfolioPage').className = 'hidden-section';
+      document.getElementById('aboutPage').className = 'hidden-section';
+
+      if (page === 'home') document.getElementById('homePage').className = 'show-section';
+      if (page === 'portfolio') document.getElementById('portfolioPage').className = 'show-section';
+      if (page === 'about') document.getElementById('aboutPage').className = 'show-section';
+
+      closeSidebar();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     let hozirgiTil = 'uz';
 
     function tilAlmashtir() {
@@ -479,11 +863,9 @@
         document.documentElement.lang = 'en';
         document.getElementById('kasb').textContent = 'Junior Developer • Fullstack Learner • Ambitious Young Specialist';
         document.getElementById('aboutText').textContent = 'I am a young specialist interested in startup ideas, technology and growth. I can work with Word, PDF, HTML and computers. I learn fast, work responsibly and stay open to new opportunities.';
-        document.getElementById('cvBtn').textContent = '📄 Download CV';
+        document.getElementById('cvBtn').textContent = '⬇️ Download CV';
         document.getElementById('callBtn').textContent = '📞 Call';
         document.getElementById('emailBtn').textContent = '📧 Email';
-        document.getElementById('tgBtn').textContent = '💬 Telegram';
-        document.getElementById('igBtn').textContent = '📸 Instagram';
         document.getElementById('skillsTitle').textContent = 'Skills';
         document.getElementById('skill4').textContent = 'Computer Literacy';
         document.getElementById('expTitle').textContent = 'Experience';
@@ -492,9 +874,6 @@
         document.getElementById('exp3').textContent = 'Working on a startup';
         document.getElementById('exp4').textContent = 'Fast learner';
         document.getElementById('eduTitle').textContent = 'Education';
-        document.getElementById('edu1').textContent = 'Najot Ta’lim — Fullstack';
-        document.getElementById('edu2').textContent = 'Cambridge — English';
-        document.getElementById('edu3').textContent = 'AIFU University';
         document.getElementById('langTitle').textContent = 'Languages';
         document.getElementById('lang1').textContent = 'Uzbek — fluent';
         document.getElementById('lang2').textContent = 'English — learning';
@@ -507,17 +886,26 @@
         document.getElementById('p2b').textContent = 'Contact';
         document.getElementById('p3t').textContent = 'Content and Outreach';
         document.getElementById('p3d').textContent = 'Interest and experience in content, authors, social media and online communication.';
+        document.getElementById('aboutPageTitle').textContent = 'About Me';
+        document.getElementById('aboutFullText').textContent = 'I am a young specialist who is eager to grow and interested in technology and startup ideas. I learn quickly, work responsibly and want to build major projects in the future.';
+        document.getElementById('ageLabel').textContent = 'Age:';
+        document.getElementById('yearLabel').textContent = 'Birth Year:';
+        document.getElementById('eduLabel2').textContent = 'Education:';
+        document.getElementById('langLabel2').textContent = 'Languages:';
+        document.getElementById('familyLabel').textContent = 'Family:';
+        document.getElementById('familyValue').textContent = 'My family is very important to me and I value my close ones.';
+        document.getElementById('goalLabel').textContent = 'Goal:';
+        document.getElementById('goalValue').textContent = 'To become a strong developer and build major projects.';
+        document.getElementById('galleryNote').textContent = 'You can move the photos left or right.';
         document.getElementById('footerText').textContent = '© 2026 Og‘abek Rahmatjonov — Personal CV Website';
         hozirgiTil = 'en';
       } else {
         document.documentElement.lang = 'uz';
         document.getElementById('kasb').textContent = 'Junior Developer • Fullstack o‘rganuvchi • Ambitsiyali yosh mutaxassis';
         document.getElementById('aboutText').textContent = 'Men startup g‘oyalari, texnologiya va rivojlanishga qiziqaman. Word, PDF, HTML va kompyuter bilan ishlashni bilaman. Tez o‘rganaman, mas’uliyat bilan ishlayman va yangi imkoniyatlarga doim ochiqman.';
-        document.getElementById('cvBtn').textContent = '📄 CV yuklab olish';
+        document.getElementById('cvBtn').textContent = '⬇️ CV yuklab olish';
         document.getElementById('callBtn').textContent = '📞 Qo‘ng‘iroq';
         document.getElementById('emailBtn').textContent = '📧 Email';
-        document.getElementById('tgBtn').textContent = '💬 Telegram';
-        document.getElementById('igBtn').textContent = '📸 Instagram';
         document.getElementById('skillsTitle').textContent = 'Ko‘nikmalar';
         document.getElementById('skill4').textContent = 'Kompyuter savodxonligi';
         document.getElementById('expTitle').textContent = 'Tajriba';
@@ -526,9 +914,6 @@
         document.getElementById('exp3').textContent = 'Startup ustida ishlash';
         document.getElementById('exp4').textContent = 'Yangi narsalarni tez o‘rganish';
         document.getElementById('eduTitle').textContent = 'Ta’lim';
-        document.getElementById('edu1').textContent = 'Najot Ta’lim — Fullstack';
-        document.getElementById('edu2').textContent = 'Cambridge — Ingliz tili';
-        document.getElementById('edu3').textContent = 'AIFU Universiteti';
         document.getElementById('langTitle').textContent = 'Tillar';
         document.getElementById('lang1').textContent = 'O‘zbek — mukammal';
         document.getElementById('lang2').textContent = 'Ingliz — o‘rganmoqda';
@@ -541,10 +926,120 @@
         document.getElementById('p2b').textContent = 'Bog‘lanish';
         document.getElementById('p3t').textContent = 'Kontent va Outreach';
         document.getElementById('p3d').textContent = 'Kontent, mualliflar, ijtimoiy tarmoqlar va onlayn aloqa jarayonlariga qiziqish va tajriba.';
+        document.getElementById('aboutPageTitle').textContent = 'Men haqimda';
+        document.getElementById('aboutFullText').textContent = 'Men rivojlanishga chanqoq, texnologiya va startup g‘oyalariga qiziqadigan yosh mutaxassisman. Yangi narsalarni tez o‘rganaman, mas’uliyat bilan ishlayman va kelajakda katta loyihalar ustida ishlashni xohlayman.';
+        document.getElementById('ageLabel').textContent = 'Yoshim:';
+        document.getElementById('yearLabel').textContent = 'Tug‘ilgan yilim:';
+        document.getElementById('eduLabel2').textContent = 'Ta’lim:';
+        document.getElementById('langLabel2').textContent = 'Tillar:';
+        document.getElementById('familyLabel').textContent = 'Oila:';
+        document.getElementById('familyValue').textContent = 'Oilam men uchun juda muhim, yaqinlarimni qadrlayman.';
+        document.getElementById('goalLabel').textContent = 'Maqsad:';
+        document.getElementById('goalValue').textContent = 'Kuchli developer bo‘lish va katta loyihalar yaratish.';
+        document.getElementById('galleryNote').textContent = 'Rasmlarni chapga yoki o‘ngga aylantirish mumkin.';
         document.getElementById('footerText').textContent = '© 2026 Og‘abek Rahmatjonov — Personal CV Website';
         hozirgiTil = 'uz';
       }
     }
+
+    const track = document.getElementById('galleryTrack');
+    let slides = Array.from(track.children);
+    let currentIndex = 0;
+    let autoSlide;
+
+    function updateGallery() {
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % slides.length;
+      updateGallery();
+      restartAuto();
+    }
+
+    function oldSlide() {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      updateGallery();
+      restartAuto();
+    }
+
+    function startAuto() {
+      autoSlide = setInterval(() => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateGallery();
+      }, 2800);
+    }
+
+    function restartAuto() {
+      clearInterval(autoSlide);
+      startAuto();
+    }
+
+    const viewerOverlay = document.getElementById('viewerOverlay');
+    const viewerTrack = document.getElementById('viewerTrack');
+    let viewerIndex = 0;
+    const viewerTotal = 3;
+
+    function updateViewer() {
+      viewerTrack.style.transform = `translateX(-${viewerIndex * 100}%)`;
+    }
+
+    function openViewer(index = 0) {
+      viewerIndex = index;
+      updateViewer();
+      viewerOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeViewer(event) {
+      if (!event || event.target.id === 'viewerOverlay' || event.target.classList.contains('viewer-close')) {
+        viewerOverlay.classList.remove('open');
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    function viewerNext(event) {
+      event.stopPropagation();
+      viewerIndex = (viewerIndex + 1) % viewerTotal;
+      updateViewer();
+    }
+
+    function viewerPrev(event) {
+      event.stopPropagation();
+      viewerIndex = (viewerIndex - 1 + viewerTotal) % viewerTotal;
+      updateViewer();
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (viewerOverlay.classList.contains('open')) {
+        if (e.key === 'Escape') closeViewer();
+        if (e.key === 'ArrowRight') { viewerIndex = (viewerIndex + 1) % viewerTotal; updateViewer(); }
+        if (e.key === 'ArrowLeft') { viewerIndex = (viewerIndex - 1 + viewerTotal) % viewerTotal; updateViewer(); }
+      }
+    });
+
+    startAuto();
+    }
+
+    function oldSlide() {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      updateGallery();
+      restartAuto();
+    }
+
+    function startAuto() {
+      autoSlide = setInterval(() => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateGallery();
+      }, 2800);
+    }
+
+    function restartAuto() {
+      clearInterval(autoSlide);
+      startAuto();
+    }
+
+    startAuto();
   </script>
 </body>
 </html>
