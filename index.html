@@ -1,0 +1,60 @@
+# Create a nicer styled PDF CV using reportlab.platypus
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.pagesizes import A4
+from reportlab.lib import colors
+
+doc = SimpleDocTemplate("/mnt/data/Ogabek_Rahmatjonov_CV_styled.pdf", pagesize=A4)
+
+styles = getSampleStyleSheet()
+
+name_style = ParagraphStyle('name', parent=styles['Heading1'], alignment=1, spaceAfter=8)
+info_style = ParagraphStyle('info', parent=styles['Normal'], alignment=1, spaceAfter=12)
+section_style = ParagraphStyle('section', parent=styles['Heading3'], spaceBefore=10, spaceAfter=4)
+text_style = styles['Normal']
+
+story = []
+
+# Header
+story.append(Paragraph("OG‘ABEK RAHMATJONOV", name_style))
+story.append(Paragraph("Toshkent | +998 50 552 95 15 | ogabekrahmatjonov112@gmail.com", info_style))
+
+def section(title, content):
+    story.append(Paragraph(title, section_style))
+    story.append(Paragraph(content, text_style))
+
+# Sections
+section("Maqsad",
+        "Sahifalovchi muharrir lavozimida ishlab, matnlar bilan ishlash va hujjatlarni tartiblash ko‘nikmalarimni rivojlantirish.")
+
+section("Ish tajribasi",
+        "<b>Savdo menejeri — Regicton LC (1.5 oy)</b><br/>"
+        "- Mijozlar bilan ishlash<br/>"
+        "- Mahsulotlarni tushuntirish<br/>"
+        "- Sotuv jarayonida ishtirok etish")
+
+section("Ko‘nikmalar",
+        "- Microsoft Word<br/>"
+        "- Excel va PowerPoint<br/>"
+        "- PDF bilan ishlash<br/>"
+        "- Matn formatlash<br/>"
+        "- Kompyuter savodxonligi<br/>"
+        "- Tez o‘rganish")
+
+section("Ta’lim",
+        "- Najot Ta’lim — Fullstack (davom etmoqda)<br/>"
+        "- Cambridge — Ingliz tili<br/>"
+        "- AIFU Universiteti")
+
+section("Tillar",
+        "- O‘zbek — mukammal<br/>"
+        "- Ingliz — o‘rganmoqda<br/>"
+        "- Rus — boshlang‘ich")
+
+section("Qo‘shimcha",
+        "- Mas’uliyatli va tartibli<br/>"
+        "- Kompyuterda ishlay olaman")
+
+doc.build(story)
+
+"/mnt/data/Ogabek_Rahmatjonov_CV_styled.pdf"
