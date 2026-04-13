@@ -35,6 +35,16 @@
       --shadow: 0 20px 60px rgba(15,23,42,0.12);
     }
 
+    html {
+      min-height: 100%;
+      background:
+        radial-gradient(circle at top left, rgba(59,130,246,0.18), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(168,85,247,0.18), transparent 24%),
+        linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
     body {
       font-family: Arial, sans-serif;
       background:
@@ -50,18 +60,8 @@
       overflow-x: hidden;
     }
 
-    html {
-      min-height: 100%;
-      background:
-        radial-gradient(circle at top left, rgba(59,130,246,0.18), transparent 28%),
-        radial-gradient(circle at bottom right, rgba(168,85,247,0.18), transparent 24%),
-        linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
-      background-attachment: fixed;
-      background-repeat: no-repeat;
-    }
-
     .menu-avatar {
-      position: fixed;
+      position: absolute;
       top: 18px;
       left: 18px;
       width: 52px;
@@ -212,6 +212,7 @@
     }
 
     .wrap {
+      position: relative;
       width: 100%;
       max-width: 1080px;
       margin: 60px auto 0;
@@ -346,7 +347,7 @@
       font-size: 14px;
     }
 
-    .btn:hover, .toggle:hover, .side-link:hover, .side-actions button:hover, .gallery-btn:hover {
+    .btn:hover, .toggle:hover, .side-link:hover, .side-actions button:hover, .gallery-btn:hover, .viewer-btn:hover {
       transform: translateY(-3px) scale(1.02);
       opacity: 0.96;
     }
@@ -459,20 +460,22 @@
       border-radius: 18px;
       border: 1px solid var(--border);
       background: var(--box);
-      padding: 14px;
+      padding: 0;
     }
 
     .gallery-track {
       display: flex;
-      gap: 14px;
+      gap: 0;
       transition: transform 0.45s ease;
       will-change: transform;
+      width: 100%;
     }
 
     .gallery-slide {
-      min-width: calc(100% - 2px);
+      min-width: 100%;
+      width: 100%;
       height: 320px;
-      border-radius: 16px;
+      border-radius: 0;
       overflow: hidden;
       flex-shrink: 0;
       background: #0b1120;
@@ -482,6 +485,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      cursor: pointer;
     }
 
     .gallery-controls {
@@ -626,38 +630,38 @@
   </style>
 </head>
 <body>
-  <div class="menu-avatar" onclick="toggleSidebar()">
-    <img src="photo.jpg?v=3" alt="Og'abek mini profil rasmi">
-  </div>
-
-  <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
-
-  <aside class="sidebar" id="sidebar">
-    <button class="close-btn" onclick="closeSidebar()">×</button>
-    <div class="side-top">
-      <img src="photo.jpg?v=3" alt="Og'abek rasmi" onclick="openViewer(0)">
-      <div>
-        <div class="side-name">Og‘abek Rahmatjonov</div>
-        <div class="side-role">Junior Developer<br>Fullstack o‘rganuvchi</div>
-      </div>
-    </div>
-
-    <div class="side-links">
-      <button class="side-link" onclick="showPage('home')">🏠 Asosiy sahifa</button>
-      <button class="side-link" onclick="showPage('portfolio')">📁 Portfolio</button>
-      <button class="side-link" onclick="showPage('about')">👤 Men haqimda</button>
-      <a class="side-link" href="cv.pdf" download>⬇️ CV yuklab olish</a>
-      <a class="side-link" href="https://t.me/Ogabek_Rahmatjonov" target="_blank">💬 Telegram</a>
-      <a class="side-link" href="https://www.instagram.com/uzdof/" target="_blank">📸 Instagram</a>
-    </div>
-
-    <div class="side-actions">
-      <button onclick="temaAlmashtir()">🌙 / ☀️ Tema</button>
-      <button onclick="tilAlmashtir()">UZ / EN</button>
-    </div>
-  </aside>
-
   <div class="wrap">
+    <div class="menu-avatar" onclick="toggleSidebar()">
+      <img src="photo.jpg?v=3" alt="Og'abek mini profil rasmi">
+    </div>
+
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+    <aside class="sidebar" id="sidebar">
+      <button class="close-btn" onclick="closeSidebar()">×</button>
+      <div class="side-top">
+        <img src="photo.jpg?v=3" alt="Og'abek rasmi" onclick="openViewer(0)">
+        <div>
+          <div class="side-name">Og‘abek Rahmatjonov</div>
+          <div class="side-role">Junior Developer<br>Fullstack o‘rganuvchi</div>
+        </div>
+      </div>
+
+      <div class="side-links">
+        <button class="side-link" onclick="showPage('home')">🏠 Asosiy sahifa</button>
+        <button class="side-link" onclick="showPage('portfolio')">📁 Portfolio</button>
+        <button class="side-link" onclick="showPage('about')">👤 Men haqimda</button>
+        <a class="side-link" href="cv.pdf" download>⬇️ CV yuklab olish</a>
+        <a class="side-link" href="https://t.me/Ogabek_Rahmatjonov" target="_blank">💬 Telegram</a>
+        <a class="side-link" href="https://www.instagram.com/uzdof/" target="_blank">📸 Instagram</a>
+      </div>
+
+      <div class="side-actions">
+        <button onclick="temaAlmashtir()">🌙 / ☀️ Tema</button>
+        <button onclick="tilAlmashtir()">UZ / EN</button>
+      </div>
+    </aside>
+
     <div class="toolbar">
       <button class="toggle" onclick="temaAlmashtir()">🌙 / ☀️ Tema</button>
       <button class="toggle" onclick="tilAlmashtir()">UZ / EN</button>
@@ -699,12 +703,28 @@
               <div class="bar"><div class="fill f2"></div></div>
             </div>
             <div class="skill">
-              <span><b id="skill3">JavaScript</b> <b>68%</b></span>
+              <span><b id="skill3">JavaScript</b> <b>70%</b></span>
               <div class="bar"><div class="fill f3"></div></div>
             </div>
             <div class="skill">
-              <span><b id="skill4">Kompyuter savodxonligi</b> <b>75%</b></span>
+              <span><b id="skill4">Python (basic)</b> <b>60%</b></span>
               <div class="bar"><div class="fill f4"></div></div>
+            </div>
+            <div class="skill">
+              <span><b id="skill5">YouTube kontent</b> <b>75%</b></span>
+              <div class="bar"><div class="fill f2"></div></div>
+            </div>
+            <div class="skill">
+              <span><b id="skill6">Matematika</b> <b>78%</b></span>
+              <div class="bar"><div class="fill f1"></div></div>
+            </div>
+            <div class="skill">
+              <span><b id="skill7">Sport</b> <b>85%</b></span>
+              <div class="bar"><div class="fill f3"></div></div>
+            </div>
+            <div class="skill">
+              <span><b id="skill8">Muammo yechish</b> <b>88%</b></span>
+              <div class="bar"><div class="fill f1"></div></div>
             </div>
           </div>
 
@@ -867,7 +887,11 @@
         document.getElementById('callBtn').textContent = '📞 Call';
         document.getElementById('emailBtn').textContent = '📧 Email';
         document.getElementById('skillsTitle').textContent = 'Skills';
-        document.getElementById('skill4').textContent = 'Computer Literacy';
+        document.getElementById('skill4').textContent = 'Python (basic)';
+        document.getElementById('skill5').textContent = 'YouTube content';
+        document.getElementById('skill6').textContent = 'Mathematics';
+        document.getElementById('skill7').textContent = 'Sports';
+        document.getElementById('skill8').textContent = 'Problem solving';
         document.getElementById('expTitle').textContent = 'Experience';
         document.getElementById('exp1').textContent = 'Regicton LC — Sales Manager';
         document.getElementById('exp2').textContent = 'Client communication and sales';
@@ -907,7 +931,11 @@
         document.getElementById('callBtn').textContent = '📞 Qo‘ng‘iroq';
         document.getElementById('emailBtn').textContent = '📧 Email';
         document.getElementById('skillsTitle').textContent = 'Ko‘nikmalar';
-        document.getElementById('skill4').textContent = 'Kompyuter savodxonligi';
+        document.getElementById('skill4').textContent = 'Python (basic)';
+        document.getElementById('skill5').textContent = 'YouTube kontent';
+        document.getElementById('skill6').textContent = 'Matematika';
+        document.getElementById('skill7').textContent = 'Sport';
+        document.getElementById('skill8').textContent = 'Muammo yechish';
         document.getElementById('expTitle').textContent = 'Tajriba';
         document.getElementById('exp1').textContent = 'Regicton LC — Savdo menejeri';
         document.getElementById('exp2').textContent = 'Mijozlar bilan ishlash va sotuv';
@@ -943,7 +971,7 @@
     }
 
     const track = document.getElementById('galleryTrack');
-    let slides = Array.from(track.children);
+    const slides = Array.from(track.children);
     let currentIndex = 0;
     let autoSlide;
 
@@ -994,7 +1022,7 @@
     function closeViewer(event) {
       if (!event || event.target.id === 'viewerOverlay' || event.target.classList.contains('viewer-close')) {
         viewerOverlay.classList.remove('open');
-        document.body.style.overflow = 'auto';
+        document.body.style.overflow = '';
       }
     }
 
@@ -1017,27 +1045,6 @@
         if (e.key === 'ArrowLeft') { viewerIndex = (viewerIndex - 1 + viewerTotal) % viewerTotal; updateViewer(); }
       }
     });
-
-    startAuto();
-    
-
-    function oldSlide() {
-      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-      updateGallery();
-      restartAuto();
-    }
-
-    function startAuto() {
-      autoSlide = setInterval(() => {
-        currentIndex = (currentIndex + 1) % slides.length;
-        updateGallery();
-      }, 2800);
-    }
-
-    function restartAuto() {
-      clearInterval(autoSlide);
-      startAuto();
-    }
 
     startAuto();
   </script>
