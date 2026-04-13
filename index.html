@@ -11,14 +11,15 @@
       --bg: #ece8e1;
       --bg2: #ddd7ce;
       --paper: rgba(255,255,255,0.42);
-      --paper-2: rgba(255,255,255,0.66);
+      --paper-2: rgba(255,255,255,0.68);
       --ink: #222222;
       --muted: #5f5b56;
       --line: rgba(34,34,34,0.12);
       --accent: #b56a16;
       --accent-2: #8f5615;
       --card: #d7d1c9;
-      --shadow: 0 20px 60px rgba(44, 37, 27, 0.12);
+      --shadow: 0 20px 60px rgba(44,37,27,0.12);
+      --hero-h: 82vh;
     }
 
     body.dark {
@@ -86,7 +87,7 @@
       box-shadow: 0 12px 30px rgba(0,0,0,0.12);
       cursor: pointer;
       z-index: 1200;
-      transition: opacity .18s ease;
+      transition: opacity .16s ease;
     }
 
     .menu-avatar.hidden-avatar {
@@ -99,7 +100,8 @@
     .side-top img,
     .hero-photo img,
     .gallery-slide img,
-    .viewer-slide img {
+    .viewer-slide img,
+    .portfolio-shot img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -122,7 +124,7 @@
     .overlay {
       position: fixed;
       inset: 0;
-      background: rgba(20, 17, 12, 0.28);
+      background: rgba(20,17,12,0.28);
       opacity: 0;
       pointer-events: none;
       transition: .18s ease;
@@ -141,11 +143,11 @@
       left: -320px;
       width: 300px;
       height: 100vh;
-      background: rgba(246, 241, 233, 0.92);
+      background: rgba(246,241,233,0.92);
       border-right: 1px solid var(--line);
       backdrop-filter: blur(14px);
       z-index: 1100;
-      transition: .22s ease;
+      transition: .2s ease;
       padding: 18px;
       overflow-y: auto;
       box-shadow: 10px 0 30px rgba(0,0,0,0.08);
@@ -185,31 +187,17 @@
       box-shadow: 0 8px 18px rgba(0,0,0,0.1);
     }
 
-    .side-name {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: .2px;
-    }
+    .side-name { font-size: 18px; font-weight: 700; letter-spacing: .2px; }
+    .side-role { margin-top: 4px; color: var(--muted); font-size: 13px; line-height: 1.35; }
 
-    .side-role {
-      margin-top: 4px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.35;
-    }
-
-    .side-links {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 18px;
-    }
+    .side-links { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
 
     .side-link,
     .side-actions button,
-    .toolbar button,
     .gallery-btn,
-    .viewer-btn {
+    .viewer-btn,
+    .action-btn,
+    .switch {
       border: 1px solid var(--line);
       background: var(--paper);
       color: var(--ink);
@@ -227,11 +215,14 @@
 
     .side-link:hover,
     .side-actions button:hover,
-    .toolbar button:hover,
     .gallery-btn:hover,
     .viewer-btn:hover,
-    .project:hover,
-    .info-item:hover {
+    .info-item:hover,
+    .skill-card:hover,
+    .exp-card:hover,
+    .portfolio-card:hover,
+    .action-btn:hover,
+    .switch:hover {
       transform: translateY(-2px);
       background: var(--paper-2);
     }
@@ -243,25 +234,80 @@
       margin-top: 16px;
     }
 
-    .side-actions button,
-    .toolbar button {
-      padding: 12px 14px;
-      border-radius: 14px;
-      font-size: 14px;
-      backdrop-filter: blur(10px);
+    .side-actions button {
+      padding: 12px 10px;
+      border-radius: 12px;
     }
 
-    .toolbar {
+    .topbar {
       display: flex;
       justify-content: flex-end;
-      gap: 10px;
+      gap: 12px;
       margin-bottom: 18px;
       flex-wrap: wrap;
     }
 
+    .switch {
+      min-width: 86px;
+      height: 46px;
+      border-radius: 999px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      padding: 0;
+    }
+
+    .switch-inner {
+      position: absolute;
+      inset: 4px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.28);
+    }
+
+    .switch-knob {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: .24s ease;
+      z-index: 2;
+    }
+
+    body.dark .theme-switch .switch-knob { left: 44px; }
+    html[lang="en"] .lang-switch .switch-knob { left: 44px; }
+
+    .switch-labels {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .switch-labels .left,
+    .switch-labels .right {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
     .hero {
       position: relative;
-      min-height: 82vh;
+      min-height: var(--hero-h);
       border: 1px solid var(--line);
       border-radius: 34px;
       padding: 36px;
@@ -329,36 +375,34 @@
       font-size: 16px;
     }
 
-    .hero-actions {
+    .action-row {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
       margin-top: 24px;
     }
 
-    .hero-btn {
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       text-decoration: none;
       border-radius: 999px;
       padding: 13px 18px;
-      border: 1px solid var(--line);
-      color: var(--ink);
-      background: var(--paper);
       font-weight: 700;
-      transition: .2s ease;
+      min-width: 138px;
+      justify-content: center;
+      backdrop-filter: blur(10px);
     }
 
-    .hero-btn.primary {
+    .action-btn.primary {
       background: var(--accent);
       color: #fff;
       border-color: transparent;
     }
 
-    .hero-btn:hover {
-      transform: translateY(-2px);
-    }
-
     .hero-showcase {
-      background: rgba(190, 184, 176, 0.56);
+      background: rgba(190,184,176,0.56);
       border: 1px solid rgba(255,255,255,0.45);
       border-radius: 34px;
       padding: 18px;
@@ -367,7 +411,7 @@
     }
 
     .hero-showcase::before,
-    .portfolio-grid::before {
+    .portfolio-shell::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -387,9 +431,10 @@
     }
 
     .mini-card,
-    .project,
+    .skill-card,
+    .exp-card,
+    .portfolio-card,
     .info-item,
-    .section-box,
     .gallery-wrap,
     .viewer-box {
       background: var(--paper-2);
@@ -482,58 +527,124 @@
       box-shadow: var(--shadow);
     }
 
-    .portfolio-grid {
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      max-width: 700px;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .wide-carousel {
       position: relative;
-      background: rgba(190, 184, 176, 0.42);
+      overflow: hidden;
+      border-radius: 30px;
+      background: rgba(190,184,176,0.42);
+      padding: 18px;
+    }
+
+    .wide-track {
+      display: flex;
+      transition: transform .3s ease;
+    }
+
+    .wide-slide {
+      min-width: 100%;
+      width: 100%;
+      flex-shrink: 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .skill-card,
+    .exp-card,
+    .portfolio-card {
+      border-radius: 26px;
+      padding: 18px;
+      transition: .2s ease;
+    }
+
+    .skill-card h3,
+    .exp-card h3,
+    .portfolio-card h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .skill-list,
+    .exp-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .skill-item,
+    .exp-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-top: 1px dashed var(--line);
+      padding-top: 10px;
+      color: var(--muted);
+    }
+
+    .skill-item:first-child,
+    .exp-item:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .skill-name,
+    .exp-name { color: var(--ink); font-weight: 700; }
+    .skill-level,
+    .exp-meta { color: var(--accent-2); font-size: 13px; font-weight: 700; }
+
+    .portfolio-shell {
+      position: relative;
+      background: rgba(190,184,176,0.42);
       border-radius: 30px;
       padding: 18px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
       overflow: hidden;
     }
 
-    .project {
-      border-radius: 26px;
-      padding: 16px;
-      transition: .2s ease;
+    .portfolio-grid {
       position: relative;
       z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
     }
 
-    .project-image {
+    .portfolio-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portfolio-shot {
       width: 100%;
-      height: 170px;
+      aspect-ratio: 4 / 3;
       border-radius: 20px;
       overflow: hidden;
       margin-bottom: 14px;
       background: #cec7be;
     }
 
-    .project h3 {
-      font-size: 24px;
-      line-height: 1;
-      margin-bottom: 10px;
-    }
-
-    .project p {
+    .portfolio-card p,
+    .about-text,
+    .muted-note,
+    .past {
       color: var(--muted);
-      line-height: 1.65;
+      line-height: 1.7;
       font-size: 14px;
-      margin-bottom: 14px;
-    }
-
-    .plink {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      color: #fff;
-      background: var(--accent);
-      padding: 10px 14px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 700;
     }
 
     .about-grid {
@@ -541,12 +652,6 @@
       grid-template-columns: 1fr 1fr;
       gap: 22px;
       align-items: start;
-    }
-
-    .about-text {
-      color: var(--muted);
-      line-height: 1.8;
-      font-size: 15px;
     }
 
     .info-list {
@@ -558,7 +663,6 @@
     .info-item {
       border-radius: 18px;
       padding: 14px 16px;
-      color: var(--muted);
       transition: .2s ease;
     }
 
@@ -587,9 +691,7 @@
       background: #d1cbc2;
     }
 
-    .gallery-slide {
-      height: 380px;
-    }
+    .gallery-slide { height: 380px; }
 
     .viewer-overlay {
       position: fixed;
@@ -617,14 +719,8 @@
       border-radius: 20px;
     }
 
-    .viewer-slide {
-      height: min(72vh, 760px);
-    }
-
-    .viewer-slide img {
-      object-fit: contain;
-      background: #111;
-    }
+    .viewer-slide { height: min(72vh, 760px); }
+    .viewer-slide img { object-fit: contain; background: #111; }
 
     .viewer-close {
       position: absolute;
@@ -638,7 +734,8 @@
     }
 
     .gallery-controls,
-    .viewer-controls {
+    .viewer-controls,
+    .wide-controls {
       display: flex;
       justify-content: center;
       gap: 10px;
@@ -646,24 +743,19 @@
     }
 
     .gallery-btn,
-    .viewer-btn {
+    .viewer-btn,
+    .wide-btn {
       width: 46px;
       height: 46px;
       border-radius: 50%;
       font-size: 18px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      cursor: pointer;
     }
 
-    .muted-note,
-    .past {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .past {
-      margin-top: 28px;
-      text-align: center;
-    }
+    .past { margin-top: 28px; text-align: center; }
 
     .hidden-section { display: none; }
     .show-section { display: block; }
@@ -671,7 +763,8 @@
     @media (max-width: 980px) {
       .hero-grid,
       .about-grid,
-      .portfolio-grid {
+      .portfolio-grid,
+      .wide-slide {
         grid-template-columns: 1fr;
       }
 
@@ -686,18 +779,13 @@
       .section-card { padding: 22px; border-radius: 26px; }
       .hero::before { left: 22px; width: calc(100% - 44px); font-size: 15px; }
       .hero::after { right: 22px; font-size: 12px; }
-      .toolbar { justify-content: flex-end; }
       .menu-avatar { width: 48px; height: 48px; }
       .showcase-grid { grid-template-columns: 1fr; }
-      .btns,
-      .hero-actions { display: grid; grid-template-columns: 1fr 1fr; }
-      .btn-order-tg { grid-column: 1 / 2; grid-row: 1; }
-      .btn-order-ig { grid-column: 2 / 3; grid-row: 1; }
-      .btn-order-call { grid-column: 1 / 2; grid-row: 2; }
-      .btn-order-email { grid-column: 2 / 3; grid-row: 2; }
-      .btn-order-cv { grid-column: 1 / 3; max-width: 220px; width: 100%; margin: 0 auto; }
+      .action-row { display: grid; grid-template-columns: 1fr 1fr; }
+      .action-btn.primary { grid-column: 1 / 3; }
       .gallery-slide { height: 290px; }
       .sidebar { width: 286px; left: -300px; }
+      .section-head { align-items: start; flex-direction: column; }
     }
   </style>
 </head>
@@ -719,46 +807,53 @@
         <img src="photo.jpg?v=3" alt="Og'abek rasmi" id="sidebarAvatar" onclick="openViewer(0)">
         <div>
           <div class="side-name">Og‘abek Rahmatjonov</div>
-          <div class="side-role">Junior Developer<br>Fullstack o‘rganuvchi</div>
+          <div class="side-role" id="sideRole">Junior Developer<br>Fullstack o‘rganuvchi</div>
         </div>
       </div>
 
       <div class="side-links">
-        <button class="side-link" onclick="showPage('home')">🏠 Asosiy sahifa</button>
-        <button class="side-link" onclick="showPage('portfolio')">📁 Portfolio</button>
-        <button class="side-link" onclick="showPage('about')">👤 Men haqimda</button>
-        <a class="side-link" href="cv.pdf" download>⬇️ CV yuklab olish</a>
+        <button class="side-link" id="navHome" onclick="showPage('home')">🏠 Asosiy sahifa</button>
+        <button class="side-link" id="navPortfolio" onclick="showPage('portfolio')">📁 Portfolio</button>
+        <button class="side-link" id="navAbout" onclick="showPage('about')">👤 Men haqimda</button>
+        <a class="side-link" id="navCV" href="cv.pdf" download>⬇️ CV yuklab olish</a>
         <a class="side-link" href="https://t.me/Ogabek_Rahmatjonov" target="_blank">💬 Telegram</a>
         <a class="side-link" href="https://www.instagram.com/uzdof/" target="_blank">📸 Instagram</a>
       </div>
 
       <div class="side-actions">
         <button onclick="temaAlmashtir()">🌗 Theme</button>
-        <button onclick="tilAlmashtir()">UZ / EN</button>
+        <button onclick="tilAlmashtir()">🌐 UZ / EN</button>
       </div>
     </aside>
 
-    <div class="toolbar">
-      <button onclick="temaAlmashtir()">🌗 Theme</button>
-      <button onclick="tilAlmashtir()">UZ / EN</button>
+    <div class="topbar">
+      <button class="switch theme-switch" onclick="temaAlmashtir()" aria-label="Theme toggle">
+        <span class="switch-inner"></span>
+        <span class="switch-knob">☀️</span>
+        <span class="switch-labels"><span class="left">☀️</span><span class="right">🌙</span></span>
+      </button>
+      <button class="switch lang-switch" onclick="tilAlmashtir()" aria-label="Language toggle">
+        <span class="switch-inner"></span>
+        <span class="switch-knob">🌐</span>
+        <span class="switch-labels"><span class="left">UZ</span><span class="right">EN</span></span>
+      </button>
     </div>
 
     <section id="homePage" class="show-section">
       <div class="hero">
         <div class="hero-grid">
           <div>
-            <div class="eyebrow">refine</div>
+            <div class="eyebrow" id="heroEyebrow">refine</div>
             <div class="hero-title" id="heroTitle">Portfolio</div>
             <div class="hero-sub" id="aboutText">
               Men startup g‘oyalari, texnologiya va rivojlanishga qiziqaman. Word, PDF, HTML va kompyuter bilan ishlay olaman. Tez o‘rganaman, mas’uliyat bilan ishlayman va yangi imkoniyatlarga doim ochiqman.
             </div>
 
-            <div class="hero-actions btns">
-              <a class="hero-btn primary btn-order-tg" href="https://t.me/Ogabek_Rahmatjonov" target="_blank" id="tgBtn">Telegram</a>
-              <a class="hero-btn btn-order-ig" href="https://www.instagram.com/uzdof/" target="_blank" id="igBtn">Instagram</a>
-              <a class="hero-btn btn-order-call" href="tel:+998505529515" id="callBtn">Qo‘ng‘iroq</a>
-              <a class="hero-btn btn-order-email" href="mailto:ogabekrahmatjonov112@gmail.com" id="emailBtn">Email</a>
-              <a class="hero-btn btn-order-cv" href="cv.pdf" download id="cvBtn">⬇ CV</a>
+            <div class="action-row">
+              <a class="action-btn primary" href="https://t.me/Ogabek_Rahmatjonov" target="_blank" id="tgBtn">💬 Telegram</a>
+              <a class="action-btn" href="https://www.instagram.com/uzdof/" target="_blank" id="igBtn">📸 Instagram</a>
+              <a class="action-btn" href="tel:+998505529515" id="callBtn">📞 Qo‘ng‘iroq</a>
+              <a class="action-btn" href="mailto:ogabekrahmatjonov112@gmail.com" id="emailBtn">📧 Email</a>
             </div>
           </div>
 
@@ -766,92 +861,124 @@
             <div class="showcase-grid">
               <div class="mini-card">
                 <div>
-                  <div class="mini-top"><span>Personal Card</span><span>#01</span></div>
+                  <div class="mini-top"><span id="miniLabel1">Personal Card</span><span>#01</span></div>
                   <div class="hero-photo"><img src="photo.jpg?v=3" alt="profile"></div>
                   <div class="mini-title"><span>Og‘abek</span><br>Rahmatjonov</div>
                 </div>
-                <div class="mini-bottom"><span class="pill">Developer</span><span>2026</span></div>
+                <div class="mini-bottom"><span class="pill" id="miniPill1">Developer</span><span>2026</span></div>
               </div>
 
               <div class="mini-card">
                 <div>
-                  <div class="mini-top"><span>Current Focus</span><span>#02</span></div>
-                  <div class="mini-title">Creative<br><span>Portfolio</span></div>
-                  <p class="muted-note" style="margin-top:10px;">Shaxsiy brend, portfolio va rivojlanish yo‘li.</p>
+                  <div class="mini-top"><span id="miniLabel2">Current Focus</span><span>#02</span></div>
+                  <div class="mini-title" id="miniTitle2">Creative<br><span>Portfolio</span></div>
+                  <p class="muted-note" id="miniDesc2" style="margin-top:10px;">Shaxsiy brend, portfolio va rivojlanish yo‘li.</p>
                 </div>
-                <div class="mini-bottom"><span class="pill">Built to Inspire</span><span>Live</span></div>
+                <div class="mini-bottom"><span class="pill" id="miniPill2">Built to Inspire</span><span>Live</span></div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="section-title"><span>about</span> skills</div>
+      <div class="section-title"><span id="skillsAccent">about</span> <span id="skillsWord" style="font-style:normal;font-family:Arial,sans-serif;color:var(--ink);font-weight:800;text-transform:uppercase;margin:0;">skills</span></div>
       <div class="section-card">
-        <div class="portfolio-grid" style="grid-template-columns: repeat(2, 1fr);">
-          <div class="project">
-            <h3 id="skillsTitle">Ko‘nikmalar</h3>
-            <p class="muted-note">HTML, CSS, Word, PDF, YouTube, matematika, sport va muammo yechish.</p>
-            <div class="info-list">
-              <div class="info-item"><b id="skill1">Microsoft Word / PDF</b> — 90%</div>
-              <div class="info-item"><b id="skill2">HTML / CSS</b> — 82%</div>
-              <div class="info-item"><b id="skill3">JavaScript</b> — 70%</div>
-              <div class="info-item"><b id="skill4">Python (basic)</b> — 60%</div>
-              <div class="info-item"><b id="skill5">YouTube kontent</b> — 75%</div>
-              <div class="info-item"><b id="skill6">Matematika</b> — 78%</div>
-              <div class="info-item"><b id="skill7">Sport</b> — 85%</div>
-              <div class="info-item"><b id="skill8">Muammo yechish</b> — 88%</div>
-            </div>
+        <div class="section-head">
+          <div>
+            <h2 id="skillsTitle">Ko‘nikmalar va tajriba</h2>
+            <p class="section-desc" id="skillsDesc">Ko‘nikmalarni va tajribalarni alohida kartalarda ko‘rish mumkin. O‘ngga yoki chapga o‘tkazib keyingi qismga o‘tasiz.</p>
           </div>
+        </div>
 
-          <div class="project">
-            <h3 id="expTitle">Tajriba</h3>
-            <div class="info-list">
-              <div class="info-item" id="exp1"><b>Regicton LC</b> — Savdo menejeri</div>
-              <div class="info-item" id="exp2">Mijozlar bilan ishlash va sotuv</div>
-              <div class="info-item" id="exp3">Startup ustida ishlash</div>
-              <div class="info-item" id="exp4">Yangi narsalarni tez o‘rganish</div>
-              <div class="info-item" id="edu1"><b>Najot Ta’lim</b> — Fullstack</div>
-              <div class="info-item" id="edu2"><b>Cambridge</b> — Ingliz tili</div>
-              <div class="info-item" id="edu3"><b>AIFU</b> — Universitet</div>
-              <div class="info-item" id="lang1"><b>O‘zbek</b> — mukammal</div>
+        <div class="wide-carousel">
+          <div class="wide-track" id="wideTrack">
+            <div class="wide-slide">
+              <div class="skill-card">
+                <h3 id="skillCardTitle1">Texnik ko‘nikmalar</h3>
+                <div class="skill-list">
+                  <div class="skill-item"><span class="skill-name" id="skill1">Microsoft Word / PDF</span><span class="skill-level" id="skill1lvl">Yuqori</span></div>
+                  <div class="skill-item"><span class="skill-name" id="skill2">HTML / CSS</span><span class="skill-level" id="skill2lvl">Yaxshi</span></div>
+                  <div class="skill-item"><span class="skill-name" id="skill3">JavaScript</span><span class="skill-level" id="skill3lvl">O‘rta</span></div>
+                  <div class="skill-item"><span class="skill-name" id="skill4">Python (basic)</span><span class="skill-level" id="skill4lvl">Boshlang‘ich+</span></div>
+                </div>
+              </div>
+              <div class="skill-card">
+                <h3 id="skillCardTitle2">Qo‘shimcha ko‘nikmalar</h3>
+                <div class="skill-list">
+                  <div class="skill-item"><span class="skill-name" id="skill5">YouTube kontent</span><span class="skill-level" id="skill5lvl">Yaxshi</span></div>
+                  <div class="skill-item"><span class="skill-name" id="skill6">Matematika</span><span class="skill-level" id="skill6lvl">Yaxshi</span></div>
+                  <div class="skill-item"><span class="skill-name" id="skill7">Sport</span><span class="skill-level" id="skill7lvl">Faol</span></div>
+                  <div class="skill-item"><span class="skill-name" id="skill8">Muammo yechish</span><span class="skill-level" id="skill8lvl">Kuchli</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="wide-slide">
+              <div class="exp-card">
+                <h3 id="expCardTitle1">Ish tajribasi</h3>
+                <div class="exp-list">
+                  <div class="exp-item"><span class="exp-name" id="exp1">Regicton LC — Savdo menejeri</span><span class="exp-meta" id="exp1meta">1.5 oy</span></div>
+                  <div class="exp-item"><span class="exp-name" id="exp2">Mijozlar bilan ishlash va sotuv</span><span class="exp-meta" id="exp2meta">Amaliy</span></div>
+                  <div class="exp-item"><span class="exp-name" id="exp3">Startup ustida ishlash</span><span class="exp-meta" id="exp3meta">Davom etmoqda</span></div>
+                  <div class="exp-item"><span class="exp-name" id="exp4">Yangi narsalarni tez o‘rganish</span><span class="exp-meta" id="exp4meta">Moslashuvchan</span></div>
+                </div>
+              </div>
+              <div class="exp-card">
+                <h3 id="expCardTitle2">Ta’lim va tillar</h3>
+                <div class="exp-list">
+                  <div class="exp-item"><span class="exp-name" id="edu1">Najot Ta’lim — Fullstack</span><span class="exp-meta" id="edu1meta">O‘qimoqda</span></div>
+                  <div class="exp-item"><span class="exp-name" id="edu2">Cambridge — Ingliz tili</span><span class="exp-meta" id="edu2meta">Davom etmoqda</span></div>
+                  <div class="exp-item"><span class="exp-name" id="edu3">AIFU Universiteti</span><span class="exp-meta" id="edu3meta">Ta’lim</span></div>
+                  <div class="exp-item"><span class="exp-name" id="lang1">O‘zbek, Ingliz, Rus</span><span class="exp-meta" id="lang1meta">Tillar</span></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+
+        <div class="wide-controls">
+          <button class="wide-btn" onclick="prevWide()">‹</button>
+          <button class="wide-btn" onclick="nextWide()">›</button>
+        </div>
+
         <div class="past" id="footerText">© 2026 Og‘abek Rahmatjonov — Personal Portfolio</div>
       </div>
     </section>
 
     <section id="portfolioPage" class="hidden-section">
-      <div class="section-title"><span>visuals</span> portfolio</div>
+      <div class="section-title"><span id="portfolioAccent">visuals</span> <span id="portfolioWord" style="font-style:normal;font-family:Arial,sans-serif;color:var(--ink);font-weight:800;text-transform:uppercase;margin:0;">portfolio</span></div>
       <div class="section-card">
-        <div class="portfolio-grid">
-          <div class="project">
-            <div class="project-image"><img src="photo.jpg?v=3" alt="project 1"></div>
-            <h3 id="p1t">Mini CV Website</h3>
-            <p id="p1d">O‘zim haqimda qisqa ma’lumot, bog‘lanish tugmalari va zamonaviy dizayndagi shaxsiy sayt.</p>
-            <a class="plink" href="https://rahmatjonov-ogabek.github.io/Mini_Site/" target="_blank" id="p1b">Ko‘rish</a>
+        <div class="section-head">
+          <div>
+            <h2 id="portfolioTitle">Loyihalar ko‘rinishi</h2>
+            <p class="section-desc" id="portfolioDesc">Hozircha bu yerda faqat preview kartalar turadi. Alohida startup sahifalari keyinroq ulanadi.</p>
           </div>
+        </div>
 
-          <div class="project">
-            <div class="project-image"><img src="photo2.jpg?v=1" alt="project 2" onerror="this.src='photo.jpg?v=3'"></div>
-            <h3 id="p2t">Startup G‘oya</h3>
-            <p id="p2d">Texnologiya va foydalanuvchi tajribasiga yo‘naltirilgan yangi loyiha konsepsiyasi ustida ishlash.</p>
-            <a class="plink" href="https://t.me/Ogabek_Rahmatjonov" target="_blank" id="p2b">Bog‘lanish</a>
-          </div>
-
-          <div class="project">
-            <div class="project-image"><img src="photo3.jpg?v=1" alt="project 3" onerror="this.src='photo.jpg?v=3'"></div>
-            <h3 id="p3t">Kontent va Outreach</h3>
-            <p id="p3d">Kontent, mualliflar, ijtimoiy tarmoqlar va onlayn aloqa jarayonlariga qiziqish va tajriba.</p>
-            <a class="plink" href="https://www.instagram.com/uzdof/" target="_blank" id="p3b">Instagram</a>
+        <div class="portfolio-shell">
+          <div class="portfolio-grid">
+            <div class="portfolio-card">
+              <div class="portfolio-shot"><img src="photo.jpg?v=3" alt="project 1"></div>
+              <h3 id="p1t">Mini CV Website</h3>
+              <p id="p1d">Shaxsiy ma’lumot, zamonaviy ko‘rinish va aloqa tugmalariga ega portfolio sahifa.</p>
+            </div>
+            <div class="portfolio-card">
+              <div class="portfolio-shot"><img src="photo2.jpg?v=1" alt="project 2" onerror="this.src='photo.jpg?v=3'"></div>
+              <h3 id="p2t">Startup G‘oya</h3>
+              <p id="p2d">Kelajakda alohida sahifaga aylantiriladigan loyiha konsepsiyasi.</p>
+            </div>
+            <div class="portfolio-card">
+              <div class="portfolio-shot"><img src="photo3.jpg?v=1" alt="project 3" onerror="this.src='photo.jpg?v=3'"></div>
+              <h3 id="p3t">Kontent va Outreach</h3>
+              <p id="p3d">Kontent, media va auditoriya bilan ishlash yo‘nalishidagi tajriba va qiziqishlar.</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <section id="aboutPage" class="hidden-section">
-      <div class="section-title"><span>about</span> profile</div>
+      <div class="section-title"><span id="aboutAccent">about</span> <span id="aboutWord" style="font-style:normal;font-family:Arial,sans-serif;color:var(--ink);font-weight:800;text-transform:uppercase;margin:0;">profile</span></div>
       <div class="section-card">
         <div class="about-grid">
           <div>
@@ -907,6 +1034,7 @@
   <script>
     function temaAlmashtir() {
       document.body.classList.toggle('dark');
+      document.querySelector('.theme-switch .switch-knob').textContent = document.body.classList.contains('dark') ? '🌙' : '☀️';
     }
 
     function toggleSidebar() {
@@ -939,11 +1067,7 @@
         clone.animate([
           { left: from.left + 'px', top: from.top + 'px', width: from.width + 'px', height: from.height + 'px', opacity: 1 },
           { left: to.left + 'px', top: to.top + 'px', width: to.width + 'px', height: to.height + 'px', opacity: 1 }
-        ], {
-          duration: 220,
-          easing: 'ease-out',
-          fill: 'forwards'
-        });
+        ], { duration: 220, easing: 'ease-out', fill: 'forwards' });
 
         setTimeout(() => {
           clone.style.opacity = '0';
@@ -975,11 +1099,7 @@
         clone.animate([
           { left: from.left + 'px', top: from.top + 'px', width: from.width + 'px', height: from.height + 'px', opacity: 1 },
           { left: to.left + 'px', top: to.top + 'px', width: to.width + 'px', height: to.height + 'px', opacity: 1 }
-        ], {
-          duration: 200,
-          easing: 'ease-in-out',
-          fill: 'forwards'
-        });
+        ], { duration: 200, easing: 'ease-in-out', fill: 'forwards' });
 
         setTimeout(() => {
           clone.style.opacity = '0';
@@ -1002,34 +1122,83 @@
 
     let hozirgiTil = 'uz';
     function tilAlmashtir() {
+      const knob = document.querySelector('.lang-switch .switch-knob');
       if (hozirgiTil === 'uz') {
         document.documentElement.lang = 'en';
+        knob.textContent = 'EN';
+        document.getElementById('sideRole').innerHTML = 'Junior Developer<br>Fullstack learner';
+        document.getElementById('navHome').textContent = '🏠 Home';
+        document.getElementById('navPortfolio').textContent = '📁 Portfolio';
+        document.getElementById('navAbout').textContent = '👤 About';
+        document.getElementById('navCV').textContent = '⬇️ Download CV';
+        document.getElementById('heroEyebrow').textContent = 'refine';
         document.getElementById('heroTitle').textContent = 'Portfolio';
-        document.getElementById('aboutText').textContent = 'I am interested in startup ideas, technology and growth. I can work with Word, PDF, HTML and computers. I learn fast, work responsibly and stay open to new opportunities.';
-        document.getElementById('cvBtn').textContent = '⬇ CV';
-        document.getElementById('callBtn').textContent = 'Call';
-        document.getElementById('emailBtn').textContent = 'Email';
-        document.getElementById('skillsTitle').textContent = 'Skills';
+        document.getElementById('aboutText').textContent = 'I am interested in startup ideas, technology and growth. I work with Word, PDF, HTML and computers. I learn fast, work responsibly and stay open to new opportunities.';
+        document.getElementById('tgBtn').textContent = '💬 Telegram';
+        document.getElementById('igBtn').textContent = '📸 Instagram';
+        document.getElementById('callBtn').textContent = '📞 Call';
+        document.getElementById('emailBtn').textContent = '📧 Email';
+        document.getElementById('miniLabel1').textContent = 'Personal Card';
+        document.getElementById('miniPill1').textContent = 'Developer';
+        document.getElementById('miniLabel2').textContent = 'Current Focus';
+        document.getElementById('miniTitle2').innerHTML = 'Creative<br><span>Portfolio</span>';
+        document.getElementById('miniDesc2').textContent = 'Personal brand, portfolio and growth direction.';
+        document.getElementById('miniPill2').textContent = 'Built to Inspire';
+        document.getElementById('skillsAccent').textContent = 'about';
+        document.getElementById('skillsWord').textContent = 'skills';
+        document.getElementById('skillsTitle').textContent = 'Skills and experience';
+        document.getElementById('skillsDesc').textContent = 'Skills and experience are shown as separate cards. Swipe or move to the next section.';
+        document.getElementById('skillCardTitle1').textContent = 'Technical skills';
+        document.getElementById('skillCardTitle2').textContent = 'Additional skills';
+        document.getElementById('skill1').textContent = 'Microsoft Word / PDF';
+        document.getElementById('skill1lvl').textContent = 'Advanced';
+        document.getElementById('skill2').textContent = 'HTML / CSS';
+        document.getElementById('skill2lvl').textContent = 'Good';
+        document.getElementById('skill3').textContent = 'JavaScript';
+        document.getElementById('skill3lvl').textContent = 'Intermediate';
+        document.getElementById('skill4').textContent = 'Python (basic)';
+        document.getElementById('skill4lvl').textContent = 'Basic+';
         document.getElementById('skill5').textContent = 'YouTube content';
+        document.getElementById('skill5lvl').textContent = 'Good';
         document.getElementById('skill6').textContent = 'Mathematics';
+        document.getElementById('skill6lvl').textContent = 'Good';
         document.getElementById('skill7').textContent = 'Sports';
+        document.getElementById('skill7lvl').textContent = 'Active';
         document.getElementById('skill8').textContent = 'Problem solving';
-        document.getElementById('expTitle').textContent = 'Experience';
-        document.getElementById('exp1').innerHTML = '<b>Regicton LC</b> — Sales Manager';
+        document.getElementById('skill8lvl').textContent = 'Strong';
+        document.getElementById('expCardTitle1').textContent = 'Work experience';
+        document.getElementById('expCardTitle2').textContent = 'Education and languages';
+        document.getElementById('exp1').textContent = 'Regicton LC — Sales Manager';
+        document.getElementById('exp1meta').textContent = '1.5 months';
         document.getElementById('exp2').textContent = 'Client communication and sales';
+        document.getElementById('exp2meta').textContent = 'Practical';
         document.getElementById('exp3').textContent = 'Working on a startup';
+        document.getElementById('exp3meta').textContent = 'Ongoing';
         document.getElementById('exp4').textContent = 'Fast learner';
-        document.getElementById('p1d').textContent = 'A modern personal website with short information and contact buttons.';
-        document.getElementById('p1b').textContent = 'View';
+        document.getElementById('exp4meta').textContent = 'Adaptive';
+        document.getElementById('edu1').textContent = 'Najot Ta’lim — Fullstack';
+        document.getElementById('edu1meta').textContent = 'Learning';
+        document.getElementById('edu2').textContent = 'Cambridge — English';
+        document.getElementById('edu2meta').textContent = 'Ongoing';
+        document.getElementById('edu3').textContent = 'AIFU University';
+        document.getElementById('edu3meta').textContent = 'Education';
+        document.getElementById('lang1').textContent = 'Uzbek, English, Russian';
+        document.getElementById('lang1meta').textContent = 'Languages';
+        document.getElementById('portfolioAccent').textContent = 'visuals';
+        document.getElementById('portfolioWord').textContent = 'portfolio';
+        document.getElementById('portfolioTitle').textContent = 'Project previews';
+        document.getElementById('portfolioDesc').textContent = 'For now, this section only shows previews. Separate startup pages will be added later.';
+        document.getElementById('p1t').textContent = 'Mini CV Website';
+        document.getElementById('p1d').textContent = 'A personal portfolio page with modern layout and contact actions.';
         document.getElementById('p2t').textContent = 'Startup Idea';
-        document.getElementById('p2d').textContent = 'A concept focused on technology and user experience.';
-        document.getElementById('p2b').textContent = 'Contact';
-        document.getElementById('p3t').textContent = 'Content & Outreach';
-        document.getElementById('p3d').textContent = 'Interest and experience in content, social media and online communication.';
-        document.getElementById('aboutPageTitle').textContent = 'About Me';
+        document.getElementById('p2d').textContent = 'A concept that can later become a separate product page.';
+        document.getElementById('p3t').textContent = 'Content and Outreach';
+        document.getElementById('p3d').textContent = 'Interest and experience in content, media and audience communication.';
+        document.getElementById('aboutAccent').textContent = 'about';
+        document.getElementById('aboutWord').textContent = 'profile';
         document.getElementById('aboutFullText').textContent = 'I am a young specialist interested in technology and startup ideas. I learn quickly, work responsibly and want to build major projects in the future.';
         document.getElementById('ageLabel').textContent = 'Age:';
-        document.getElementById('yearLabel').textContent = 'Birth Year:';
+        document.getElementById('yearLabel').textContent = 'Birth year:';
         document.getElementById('eduLabel2').textContent = 'Education:';
         document.getElementById('langLabel2').textContent = 'Languages:';
         document.getElementById('familyLabel').textContent = 'Family:';
@@ -1041,29 +1210,77 @@
         hozirgiTil = 'en';
       } else {
         document.documentElement.lang = 'uz';
+        knob.textContent = '🌐';
+        document.getElementById('sideRole').innerHTML = 'Junior Developer<br>Fullstack o‘rganuvchi';
+        document.getElementById('navHome').textContent = '🏠 Asosiy sahifa';
+        document.getElementById('navPortfolio').textContent = '📁 Portfolio';
+        document.getElementById('navAbout').textContent = '👤 Men haqimda';
+        document.getElementById('navCV').textContent = '⬇️ CV yuklab olish';
+        document.getElementById('heroEyebrow').textContent = 'refine';
         document.getElementById('heroTitle').textContent = 'Portfolio';
         document.getElementById('aboutText').textContent = 'Men startup g‘oyalari, texnologiya va rivojlanishga qiziqaman. Word, PDF, HTML va kompyuter bilan ishlay olaman. Tez o‘rganaman, mas’uliyat bilan ishlayman va yangi imkoniyatlarga doim ochiqman.';
-        document.getElementById('cvBtn').textContent = '⬇ CV';
-        document.getElementById('callBtn').textContent = 'Qo‘ng‘iroq';
-        document.getElementById('emailBtn').textContent = 'Email';
-        document.getElementById('skillsTitle').textContent = 'Ko‘nikmalar';
+        document.getElementById('tgBtn').textContent = '💬 Telegram';
+        document.getElementById('igBtn').textContent = '📸 Instagram';
+        document.getElementById('callBtn').textContent = '📞 Qo‘ng‘iroq';
+        document.getElementById('emailBtn').textContent = '📧 Email';
+        document.getElementById('miniLabel1').textContent = 'Personal Card';
+        document.getElementById('miniPill1').textContent = 'Developer';
+        document.getElementById('miniLabel2').textContent = 'Current Focus';
+        document.getElementById('miniTitle2').innerHTML = 'Creative<br><span>Portfolio</span>';
+        document.getElementById('miniDesc2').textContent = 'Shaxsiy brend, portfolio va rivojlanish yo‘li.';
+        document.getElementById('miniPill2').textContent = 'Built to Inspire';
+        document.getElementById('skillsAccent').textContent = 'about';
+        document.getElementById('skillsWord').textContent = 'skills';
+        document.getElementById('skillsTitle').textContent = 'Ko‘nikmalar va tajriba';
+        document.getElementById('skillsDesc').textContent = 'Ko‘nikmalar va tajribalar alohida kartalarda ko‘rsatilgan. Yon tugmalar orqali keyingi qismga o‘tish mumkin.';
+        document.getElementById('skillCardTitle1').textContent = 'Texnik ko‘nikmalar';
+        document.getElementById('skillCardTitle2').textContent = 'Qo‘shimcha ko‘nikmalar';
+        document.getElementById('skill1').textContent = 'Microsoft Word / PDF';
+        document.getElementById('skill1lvl').textContent = 'Yuqori';
+        document.getElementById('skill2').textContent = 'HTML / CSS';
+        document.getElementById('skill2lvl').textContent = 'Yaxshi';
+        document.getElementById('skill3').textContent = 'JavaScript';
+        document.getElementById('skill3lvl').textContent = 'O‘rta';
+        document.getElementById('skill4').textContent = 'Python (basic)';
+        document.getElementById('skill4lvl').textContent = 'Boshlang‘ich+';
         document.getElementById('skill5').textContent = 'YouTube kontent';
+        document.getElementById('skill5lvl').textContent = 'Yaxshi';
         document.getElementById('skill6').textContent = 'Matematika';
+        document.getElementById('skill6lvl').textContent = 'Yaxshi';
         document.getElementById('skill7').textContent = 'Sport';
+        document.getElementById('skill7lvl').textContent = 'Faol';
         document.getElementById('skill8').textContent = 'Muammo yechish';
-        document.getElementById('expTitle').textContent = 'Tajriba';
-        document.getElementById('exp1').innerHTML = '<b>Regicton LC</b> — Savdo menejeri';
+        document.getElementById('skill8lvl').textContent = 'Kuchli';
+        document.getElementById('expCardTitle1').textContent = 'Ish tajribasi';
+        document.getElementById('expCardTitle2').textContent = 'Ta’lim va tillar';
+        document.getElementById('exp1').textContent = 'Regicton LC — Savdo menejeri';
+        document.getElementById('exp1meta').textContent = '1.5 oy';
         document.getElementById('exp2').textContent = 'Mijozlar bilan ishlash va sotuv';
+        document.getElementById('exp2meta').textContent = 'Amaliy';
         document.getElementById('exp3').textContent = 'Startup ustida ishlash';
+        document.getElementById('exp3meta').textContent = 'Davom etmoqda';
         document.getElementById('exp4').textContent = 'Yangi narsalarni tez o‘rganish';
-        document.getElementById('p1d').textContent = 'O‘zim haqimda qisqa ma’lumot, bog‘lanish tugmalari va zamonaviy dizayndagi shaxsiy sayt.';
-        document.getElementById('p1b').textContent = 'Ko‘rish';
+        document.getElementById('exp4meta').textContent = 'Moslashuvchan';
+        document.getElementById('edu1').textContent = 'Najot Ta’lim — Fullstack';
+        document.getElementById('edu1meta').textContent = 'O‘qimoqda';
+        document.getElementById('edu2').textContent = 'Cambridge — Ingliz tili';
+        document.getElementById('edu2meta').textContent = 'Davom etmoqda';
+        document.getElementById('edu3').textContent = 'AIFU Universiteti';
+        document.getElementById('edu3meta').textContent = 'Ta’lim';
+        document.getElementById('lang1').textContent = 'O‘zbek, Ingliz, Rus';
+        document.getElementById('lang1meta').textContent = 'Tillar';
+        document.getElementById('portfolioAccent').textContent = 'visuals';
+        document.getElementById('portfolioWord').textContent = 'portfolio';
+        document.getElementById('portfolioTitle').textContent = 'Loyihalar ko‘rinishi';
+        document.getElementById('portfolioDesc').textContent = 'Hozircha bu yerda faqat preview kartalar turadi. Alohida startup sahifalari keyinroq ulanadi.';
+        document.getElementById('p1t').textContent = 'Mini CV Website';
+        document.getElementById('p1d').textContent = 'Shaxsiy ma’lumot, zamonaviy ko‘rinish va aloqa tugmalariga ega portfolio sahifa.';
         document.getElementById('p2t').textContent = 'Startup G‘oya';
-        document.getElementById('p2d').textContent = 'Texnologiya va foydalanuvchi tajribasiga yo‘naltirilgan yangi loyiha konsepsiyasi ustida ishlash.';
-        document.getElementById('p2b').textContent = 'Bog‘lanish';
+        document.getElementById('p2d').textContent = 'Kelajakda alohida sahifaga aylantiriladigan loyiha konsepsiyasi.';
         document.getElementById('p3t').textContent = 'Kontent va Outreach';
-        document.getElementById('p3d').textContent = 'Kontent, mualliflar, ijtimoiy tarmoqlar va onlayn aloqa jarayonlariga qiziqish va tajriba.';
-        document.getElementById('aboutPageTitle').textContent = 'Men haqimda';
+        document.getElementById('p3d').textContent = 'Kontent, media va auditoriya bilan ishlash yo‘nalishidagi tajriba va qiziqishlar.';
+        document.getElementById('aboutAccent').textContent = 'about';
+        document.getElementById('aboutWord').textContent = 'profile';
         document.getElementById('aboutFullText').textContent = 'Men rivojlanishga chanqoq, texnologiya va startup g‘oyalariga qiziqadigan yosh mutaxassisman. Yangi narsalarni tez o‘rganaman, mas’uliyat bilan ishlayman va kelajakda katta loyihalar ustida ishlashni xohlayman.';
         document.getElementById('ageLabel').textContent = 'Yoshim:';
         document.getElementById('yearLabel').textContent = 'Tug‘ilgan yilim:';
@@ -1103,6 +1320,12 @@
     }
     function viewerNext(event) { event.stopPropagation(); viewerIndex = (viewerIndex + 1) % viewerTotal; updateViewer(); }
     function viewerPrev(event) { event.stopPropagation(); viewerIndex = (viewerIndex - 1 + viewerTotal) % viewerTotal; updateViewer(); }
+
+    const wideTrack = document.getElementById('wideTrack');
+    let wideIndex = 0;
+    function updateWide() { wideTrack.style.transform = `translateX(-${wideIndex * 100}%)`; }
+    function nextWide() { wideIndex = (wideIndex + 1) % 2; updateWide(); }
+    function prevWide() { wideIndex = (wideIndex - 1 + 2) % 2; updateWide(); }
 
     document.addEventListener('keydown', function(e) {
       if (viewerOverlay.classList.contains('open')) {
