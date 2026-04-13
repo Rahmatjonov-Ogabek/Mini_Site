@@ -12,9 +12,9 @@
     }
 
     :root {
-      --bg1: #0f172a;
-      --bg2: #1e293b;
-      --bg3: #111827;
+      --bg1: #020617;
+      --bg2: #0f172a;
+      --bg3: #1e1b4b;
       --text: #ffffff;
       --muted: #dbeafe;
       --card: rgba(255,255,255,0.08);
@@ -23,6 +23,8 @@
       --accent1: #22c55e;
       --accent2: #3b82f6;
       --accent3: #a855f7;
+      --accent4: #ec4899;
+      --shadow: 0 20px 60px rgba(0,0,0,0.28);
     }
 
     body.light {
@@ -34,11 +36,15 @@
       --card: rgba(255,255,255,0.72);
       --border: rgba(15,23,42,0.08);
       --box: rgba(255,255,255,0.65);
+      --shadow: 0 20px 60px rgba(15,23,42,0.12);
     }
 
     body {
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+      background:
+        radial-gradient(circle at top left, rgba(59,130,246,0.18), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(168,85,247,0.18), transparent 24%),
+        linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
       color: var(--text);
       min-height: 100vh;
       padding: 20px;
@@ -47,7 +53,7 @@
 
     .wrap {
       width: 100%;
-      max-width: 1050px;
+      max-width: 1080px;
       margin: 0 auto;
     }
 
@@ -66,17 +72,28 @@
       cursor: pointer;
       border: 1px solid var(--border);
       backdrop-filter: blur(10px);
+      transition: 0.25s ease;
     }
 
     .card {
       width: 100%;
       background: var(--card);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
       border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 32px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+      border-radius: 28px;
+      padding: 34px;
+      box-shadow: var(--shadow);
       animation: chiqish 0.8s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(255,255,255,0.05), transparent 30%, transparent 70%, rgba(255,255,255,0.05));
+      pointer-events: none;
     }
 
     @keyframes chiqish {
@@ -92,20 +109,42 @@
 
     .top {
       display: grid;
-      grid-template-columns: 150px 1fr;
-      gap: 24px;
+      grid-template-columns: 160px 1fr;
+      gap: 26px;
       align-items: center;
-      margin-bottom: 28px;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 1;
     }
 
     .rasm {
-      width: 150px;
-      height: 150px;
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
       overflow: hidden;
       border: 4px solid rgba(255,255,255,0.18);
       background: #1f2937;
       margin: 0 auto;
+      box-shadow:
+        0 0 0 8px rgba(255,255,255,0.04),
+        0 0 35px rgba(59,130,246,0.22),
+        0 0 55px rgba(168,85,247,0.16);
+      animation: glow 3s infinite alternate ease-in-out;
+    }
+
+    @keyframes glow {
+      from {
+        box-shadow:
+          0 0 0 8px rgba(255,255,255,0.04),
+          0 0 30px rgba(59,130,246,0.18),
+          0 0 45px rgba(168,85,247,0.12);
+      }
+      to {
+        box-shadow:
+          0 0 0 10px rgba(255,255,255,0.05),
+          0 0 42px rgba(59,130,246,0.26),
+          0 0 68px rgba(168,85,247,0.2);
+      }
     }
 
     .rasm img {
@@ -132,7 +171,7 @@
     .text {
       color: var(--muted);
       line-height: 1.8;
-      max-width: 700px;
+      max-width: 720px;
     }
 
     .btns {
@@ -150,11 +189,13 @@
       color: white;
       font-weight: bold;
       transition: 0.25s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.16);
     }
 
     .btn1 { background: var(--accent1); }
     .btn2 { background: var(--accent2); }
     .btn3 { background: var(--accent3); }
+    .btn4 { background: linear-gradient(135deg, #f97316, var(--accent4), #7c3aed); }
 
     .btn:hover, .toggle:hover {
       transform: translateY(-3px) scale(1.02);
@@ -166,6 +207,8 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 18px;
       margin-top: 28px;
+      position: relative;
+      z-index: 1;
     }
 
     .box {
@@ -174,6 +217,12 @@
       border-radius: 18px;
       padding: 20px;
       animation: chiqish 0.9s ease;
+      transition: 0.25s ease;
+    }
+
+    .box:hover, .project:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255,255,255,0.18);
     }
 
     .box h2 {
@@ -223,11 +272,17 @@
       from { width: 0; }
     }
 
+    .portfolioWrap {
+      margin-top: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
     .portfolio {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
-      margin-top: 28px;
+      margin-top: 14px;
     }
 
     .project {
@@ -236,10 +291,6 @@
       border-radius: 18px;
       padding: 18px;
       transition: 0.25s ease;
-    }
-
-    .project:hover {
-      transform: translateY(-5px);
     }
 
     .project h3 {
@@ -251,6 +302,17 @@
       color: var(--muted);
       line-height: 1.7;
       font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .plink {
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      background: rgba(59,130,246,0.85);
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-size: 14px;
     }
 
     .past {
@@ -258,6 +320,14 @@
       text-align: center;
       color: var(--muted);
       font-size: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 900px) {
+      .portfolio {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 800px) {
@@ -266,13 +336,16 @@
         text-align: center;
       }
 
-      .grid,
-      .portfolio {
+      .grid {
         grid-template-columns: 1fr;
       }
 
       h1 {
         font-size: 32px;
+      }
+
+      .btns {
+        justify-content: center;
       }
     }
   </style>
@@ -286,7 +359,7 @@
     <div class="card">
       <div class="top">
         <div class="rasm">
-          <img src="photo.jpg?v=1" alt="Og'abek rasmi">
+          <img src="photo.jpg?v=2" alt="Og'abek rasmi">
         </div>
 
         <div>
@@ -300,6 +373,7 @@
             <a class="btn btn1" href="tel:+998505529515">📞 Qo‘ng‘iroq</a>
             <a class="btn btn2" href="mailto:ogabekrahmatjonov112@gmail.com">📧 Email</a>
             <a class="btn btn3" href="https://t.me/Ogabek_Rahmatjonov" target="_blank">💬 Telegram</a>
+            <a class="btn btn4" href="https://www.instagram.com/uzdof/" target="_blank">📸 Instagram</a>
           </div>
         </div>
       </div>
@@ -358,22 +432,27 @@
         </div>
       </div>
 
-      <div class="box" style="margin-top: 24px;">
-        <h2>Portfolio</h2>
-        <div class="portfolio">
-          <div class="project">
-            <h3>Mini CV Website</h3>
-            <p>O‘zim haqimda qisqa ma’lumot, bog‘lanish tugmalari va zamonaviy dizayndagi shaxsiy sayt.</p>
-          </div>
+      <div class="portfolioWrap">
+        <div class="box">
+          <h2>Portfolio</h2>
+          <div class="portfolio">
+            <div class="project">
+              <h3>Mini CV Website</h3>
+              <p>O‘zim haqimda qisqa ma’lumot, bog‘lanish tugmalari va zamonaviy dizayndagi shaxsiy sayt.</p>
+              <a class="plink" href="https://rahmatjonov-ogabek.github.io/Mini_Site/" target="_blank">Ko‘rish</a>
+            </div>
 
-          <div class="project">
-            <h3>Startup G‘oya</h3>
-            <p>Texnologiya va foydalanuvchi tajribasiga yo‘naltirilgan yangi loyiha konsepsiyasi ustida ishlash.</p>
-          </div>
+            <div class="project">
+              <h3>Startup G‘oya</h3>
+              <p>Texnologiya va foydalanuvchi tajribasiga yo‘naltirilgan yangi loyiha konsepsiyasi ustida ishlash.</p>
+              <a class="plink" href="https://t.me/Ogabek_Rahmatjonov" target="_blank">Bog‘lanish</a>
+            </div>
 
-          <div class="project">
-            <h3>Kontent va Outreach</h3>
-            <p>Kontent, mualliflar, ijtimoiy tarmoqlar va onlayn aloqa jarayonlariga qiziqish va tajriba.</p>
+            <div class="project">
+              <h3>Kontent va Outreach</h3>
+              <p>Kontent, mualliflar, ijtimoiy tarmoqlar va onlayn aloqa jarayonlariga qiziqish va tajriba.</p>
+              <a class="plink" href="https://www.instagram.com/uzdof/" target="_blank">Instagram</a>
+            </div>
           </div>
         </div>
       </div>
